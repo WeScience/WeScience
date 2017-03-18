@@ -1,0 +1,35 @@
+{% extends "common/layout.html" %}
+{% block body %}
+<section class="row row-1">
+  <h1>Create a new research project</h1>
+  <p>A project contains all the files, events, data and discussions for your project.</p>
+</section>
+<section class="row row-2">
+  <form id="form-title">
+    <div class="row">
+      <label for="name">Project name</label>
+      <input type="text" id="project-name" name="project_name">
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <label for="name">Start date</label>
+        <input type="text" id="strt-date" name="start_date">
+      </div>
+      <div class="col-md-2">
+        <label for="name">End date</label>
+        <input type="text" id="end-date" name="end_date">
+      </div>
+    </div>
+    <div class="row">
+      <label for="summary">Project summary</label>
+      <input type="text" id="project-summary" name="project_summary">
+    </div>
+    <div class="row">
+      <label for="description">Project description</label>
+      <textarea id="project-description" name="project_description"></textarea>
+    </div>
+</section>
+<section class="row row-3">
+
+</section>
+{% endblock %}

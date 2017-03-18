@@ -24,6 +24,10 @@ def profile(userid):
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route("/new")
+def new():
+    return render_template('new.html')
+
 # API Routes
 @app.route("/api/user/<int:userid>")
 def apiUser(userid):
