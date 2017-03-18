@@ -22,7 +22,7 @@ function api() {
     };
 }
 
-},{"jquery":6}],2:[function(require,module,exports){
+},{"jquery":9}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -46,62 +46,50 @@ function projects() {
 }
 
 },{"./api":1}],3:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var _jquery = require("jquery");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = users;
 
-var _jquery2 = _interopRequireDefault(_jquery);
+var _api = require('./api');
 
-var _dashboard = require("./pages/dashboard.js");
-
-var _dashboard2 = _interopRequireDefault(_dashboard);
+var _api2 = _interopRequireDefault(_api);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log("Working");
+function users() {
 
-var base_w = window.innerWidth / 2;
-var base_h = window.innerWidth / 2;
-
-for (var i = 0; i < 10; i++) {
-    (0, _jquery2.default)("#wrapper").append("<div class='circle" + i + " sub-border'></div>");
-    //set current circle width
-    (0, _jquery2.default)(".circle" + i).css("width", base_w - 40 * i);
-    //set current circle height
-    (0, _jquery2.default)(".circle" + i).css("height", base_h - 40 * i);
-    //get half current width
-    var cur_w = (0, _jquery2.default)(".circle" + i).width() / 2;
-    //get half current height
-    var cur_h = (0, _jquery2.default)(".circle" + i).height() / 2;
-
-    if (i !== 0) {
-        //get half previous width
-        var pre_w = (0, _jquery2.default)(".circle" + (i - 1)).width() / 2;
-        //get half previous height
-        var pre_h = (0, _jquery2.default)(".circle" + (i - 1)).height() / 2;
-        //get previous position
-        var pre_top = (0, _jquery2.default)(".circle" + (i - 1)).position().top;
-        var pre_left = (0, _jquery2.default)(".circle" + (i - 1)).position().left;
-
-        //set current position
-        (0, _jquery2.default)(".circle" + i).css("top", pre_top + pre_h - cur_h);
-        (0, _jquery2.default)(".circle" + i).css("left", pre_left + pre_w - cur_w);
-    } else {
-        //first circle        
-        (0, _jquery2.default)(".circle" + i).css("top", 0);
-        (0, _jquery2.default)(".circle" + i).css("left", base_h - cur_w);
-    }
-    //rotate animation
-    (0, _jquery2.default)(".circle" + i).css("-webkit-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
-    (0, _jquery2.default)(".circle" + i).css("-moz-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
-    (0, _jquery2.default)(".circle" + i).css("-o-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
-    (0, _jquery2.default)(".circle" + i).css("-ms-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
+    return {
+        find: function find(user_id, callback) {
+            (0, _api2.default)().get('/api/user/' + user_id, callback);
+        }
+    };
 }
 
+},{"./api":1}],4:[function(require,module,exports){
 'use strict';
 
 // Importing jQuery in ES6 style
 
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _dashboard = require('./pages/dashboard.js');
+
+var _dashboard2 = _interopRequireDefault(_dashboard);
+
+var _home = require('./pages/home.js');
+
+var _home2 = _interopRequireDefault(_home);
+
+var _profile = require('./pages/profile.js');
+
+var _profile2 = _interopRequireDefault(_profile);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // We need to expose jQuery as global variable
 window.jQuery = window.$ = _jquery2.default;
@@ -110,9 +98,11 @@ window.jQuery = window.$ = _jquery2.default;
 // using Node.js style import works without problems
 require('bootstrap-sass');
 
-if ((0, _jquery2.default)('.dashboard').length) (0, _dashboard2.default)().init();
+if ((0, _jquery2.default)('.dashboard-page').length) (0, _dashboard2.default)().init();
+if ((0, _jquery2.default)('.home-page').length) (0, _home2.default)().init();
+if ((0, _jquery2.default)('.profile-page').length) (0, _profile2.default)().init();
 
-},{"./pages/dashboard.js":4,"bootstrap-sass":5,"jquery":6}],4:[function(require,module,exports){
+},{"./pages/dashboard.js":5,"./pages/home.js":6,"./pages/profile.js":7,"bootstrap-sass":8,"jquery":9}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -136,7 +126,85 @@ function dashboard() {
     };
 };
 
-},{"../api/projects":2}],5:[function(require,module,exports){
+},{"../api/projects":2}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = home;
+function home() {
+    return {
+        init: function init() {
+            console.log("Working");
+
+            var base_w = window.innerWidth / 2;
+            var base_h = window.innerWidth / 2;
+
+            for (var i = 0; i < 10; i++) {
+                $("#wrapper").append("<div class='circle" + i + " sub-border'></div>");
+                //set current circle width
+                $(".circle" + i).css("width", base_w - 40 * i);
+                //set current circle height
+                $(".circle" + i).css("height", base_h - 40 * i);
+                //get half current width
+                var cur_w = $(".circle" + i).width() / 2;
+                //get half current height
+                var cur_h = $(".circle" + i).height() / 2;
+
+                if (i !== 0) {
+                    //get half previous width
+                    var pre_w = $(".circle" + (i - 1)).width() / 2;
+                    //get half previous height
+                    var pre_h = $(".circle" + (i - 1)).height() / 2;
+                    //get previous position
+                    var pre_top = $(".circle" + (i - 1)).position().top;
+                    var pre_left = $(".circle" + (i - 1)).position().left;
+
+                    //set current position
+                    $(".circle" + i).css("top", pre_top + pre_h - cur_h);
+                    $(".circle" + i).css("left", pre_left + pre_w - cur_w);
+                } else {
+                    //first circle
+                    $(".circle" + i).css("top", 0);
+                    $(".circle" + i).css("left", base_h - cur_w);
+                }
+                //rotate animation
+                $(".circle" + i).css("-webkit-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
+                $(".circle" + i).css("-moz-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
+                $(".circle" + i).css("-o-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
+                $(".circle" + i).css("-ms-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
+            }
+        }
+    };
+}
+
+},{}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = profile;
+
+var _users = require('../api/users');
+
+var _users2 = _interopRequireDefault(_users);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function profile() {
+    return {
+        init: function init() {
+            console.log("H");
+            (0, _users2.default)().find(1, function (response) {
+                console.log(response);
+            });
+        }
+    };
+};
+
+},{"../api/users":3}],8:[function(require,module,exports){
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -2515,7 +2583,7 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.0
  * https://jquery.com/
@@ -12761,4 +12829,4 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[3]);
+},{}]},{},[4]);
