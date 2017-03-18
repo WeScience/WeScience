@@ -1,7 +1,7 @@
 .vagrant
 /*.log
-public/css
-public/js
-public/fonts
 node_modules
 bower_components
+__pycache__
+.DS_Store
+*.pyc
