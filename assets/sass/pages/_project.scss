@@ -1,0 +1,55 @@
+nav.project-nav {
+    background: $background-dark;
+    ul {
+        @extend .clearfix;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+            float: left;
+            a {
+                display: block;
+                padding: 12px 24px;
+                background: lighten($background-dark, 5%);
+                &:hover {
+                    background: $background-light;
+                    color: $brand-secondary;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+.project-documents {
+    ul {
+        list-style: none;
+        margin: 0 0 20px;
+        padding: 0;
+        li {
+            padding: 6px 24px;
+            background: $background-light;
+            border-bottom: 1px solid #fff;
+            &:hover {
+                background: $brand-primary;
+                a {
+                    color: white;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+            small {
+                float: right;
+            }
+        }
+    }
+    h3 {
+        padding: 6px 24px;
+        background: $background-light;
+        border-bottom: 1px solid $brand-primary;
+        font-size: 1em;
+        font-weight: bold;
+        margin: 0;
+    }
+}

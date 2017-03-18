@@ -9,12 +9,16 @@ def index():
 
 @app.route("/project/<int:projectid>")
 def project(projectid):
-	project = database.projects.query.filter_by(id=project).first()
-	return "project"
+	#project = database.projects.query.filter_by(id=project).first()
+	return render_template('project.html')
 
 @app.route("/project/<int:projectid>/<int:eventid>")
 def projectEvent(projectid, eventid):
 	return render_template('event.html')
+
+@app.route("/profile/<int:userid>", defaults={'userid': None})
+def profile(userid):
+    return render_template('profile.html')
 
 # API Routes
 @app.route("/api/user/<int:userid>")

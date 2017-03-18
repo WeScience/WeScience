@@ -1,0 +1,74 @@
+{% extends "common/layout.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <img src="http://placehold.it/350x350" class="img-responsive">
+        </div>
+        <div class="col-sm-9">
+            <ul class="personal-details">
+                <li><i class="fa fa-building"></i> Nottingham University</li>
+                <li><i class="fa fa-user"></i> Director of Mad Science</li>
+                <li><i class="fa fa-envelope"></i> alistairshaw@gmail.com</li>
+                <li><i class="fa fa-twitter"></i> @alistairshaw</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="profile-projects">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#public" aria-controls="public" role="tab" data-toggle="tab">Public Projects</a></li>
+            <li role="presentation">
+                <a href="#private" aria-controls="private" role="tab" data-toggle="tab">Private Projects</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="public">
+                <a class="project-stub" href="#">
+                    <h3>My First Project</h3>
+                    <i class="fa fa-anchor"></i>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    <p>Created: 17th March 2017</p>
+                    <p>Last Update: 17th March 2017, 2:45pm</p>
+                </a>
+
+                <a class="project-stub" href="#">
+                    <h3>My Second Project</h3>
+                    <i class="fa fa-anchor"></i>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    <p>Created: 17th March 2017</p>
+                    <p>Last Update: 17th March 2017, 2:45pm</p>
+                </a>
+
+                <a class="project-stub" href="#">
+                    <h3>My Third Project</h3>
+                    <i class="fa fa-anchor"></i>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    <p>Created: 17th March 2017</p>
+                    <p>Last Update: 17th March 2017, 2:45pm</p>
+                </a>
+
+                <a class="project-stub" href="#">
+                    <h3>My Fourth Project</h3>
+                    <i class="fa fa-anchor"></i>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    <p>Created: 17th March 2017</p>
+                    <p>Last Update: 17th March 2017, 2:45pm</p>
+                </a>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="private">
+                <a class="project-stub" href="#">
+                    <h3>My Private Project</h3>
+                    <i class="fa fa-anchor"></i>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    <p>Created: 17th March 2017</p>
+                    <p>Last Update: 17th March 2017, 2:45pm</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
