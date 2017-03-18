@@ -50,20 +50,3 @@
 .small{
      background: rgba( 45, 45, 42, 0.7);
 }
-
-/*Shows mobile version of logo*/
-#logoMob{
-    display: inline;
-}
-#logoMob img{
-    height: 100px;
-    opacity: 1 !important;
-}
-
-/*Hides desktop version of logo*/
-#logoDesk {
-    display: none;
-}
-#logoDesk{
-    opacity: 1 !important;
-}
