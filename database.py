@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from marshmallow import Schema, fields
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -35,16 +34,6 @@ class users(db.Model):
 
 	def __repr__(self):
 		return '<User %r>' % self.email
-
-class UserSchema(Schema):
-    email = fields.Email()
-    password = fields.String()
-    name = fields.String()
-    institution = fields.String()
-    position = fields.String()
-    avatar = fields.String()
-    twitter = fields.String()
-    
 
 class roles_users(db.Model):
 	user_id = db.Column(db.Integer, primary_key=True)

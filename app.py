@@ -45,11 +45,6 @@ def apiUser(userid):
 	}
 	return jsonify(userJson)
 
-@app.route("/api/project")
-def apiProjectSearch(userid):
-	user = database.users.query.filter_by(id=userid).first()
-	return jsonify(user)
-
 @app.route("/api/project/<int:projectid>")
 def apiProject(projectid):
 	project = database.projects.query.filter_by(id=projectid).first()
@@ -57,6 +52,7 @@ def apiProject(projectid):
 		"id" : project.id,
 		"project_name" : project.project_name,
 		"start_date" : project.start_date,
+		"end_date" : project.end_date,
 		"description" : project.description,
 		"is_public" : project.isPublic
 	}
