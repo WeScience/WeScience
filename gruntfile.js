@@ -7,30 +7,30 @@ module.exports = function (grunt) {
         concat: {
             css: {
                 src: [
-                    'resources/css/main.css'
+                    'assets/css/main.css'
                 ],
-                dest: 'public/css/production.css'
+                dest: 'static/css/production.css'
             }
         },
 
         sass: {
             dist: {
                 files: {
-                    'resources/css/main.css': 'resources/sass/app.scss'
+                    'assets/css/main.css': 'assets/sass/app.scss'
                 }
             }
         },
 
         autoprefixer: {
             production_css: {
-                src: 'public/css/production.css'
+                src: 'static/css/production.css'
             }
         },
 
         cssmin: {
             css: {
-                src: 'public/css/production.css',
-                dest: 'public/css/production.css'
+                src: 'static/css/production.css',
+                dest: 'static/css/production.css'
             }
         },
 
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
                     transform: [['babelify', {presets: ['es2015', 'react']}]]
                 },
                 files: {
-                    'public/js/production.js': ['resources/js/app.js']
+                    'static/js/production.js': ['assets/js/app.js']
                 }
             }
         },
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
         uglify: {
             main: {
                 files: {
-                    'public/js/production.js': ['public/js/production.js'] // we overwrite the min.js file that we created in concat
+                    'static/js/production.js': ['static/js/production.js'] // we overwrite the min.js file that we created in concat
                 }
             },
             options: {
@@ -62,7 +62,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         src: ['node_modules/font-awesome/fonts/*'],
-                        dest: 'public/fonts/',
+                        dest: 'static/fonts/',
                         filter: 'isFile',
                         flatten: true
                     }
@@ -73,21 +73,21 @@ module.exports = function (grunt) {
         // the watch task doesn't uglify or minify (for development), run grunt again to get full production code
         watch: {
             scripts: {
-                files: ['resources/js/**/*.js'],
+                files: ['assets/js/**/*.js'],
                 tasks: ['browserify'],
                 options: {
                     spawn: false
                 }
             },
             css: {
-                files: ['resources/sass/**/*.scss', 'resources/css/*.css'],
+                files: ['assets/sass/**/*.scss', 'assets/css/*.css'],
                 tasks: ['sass:dist', 'concat:css', 'autoprefixer:production_css'],
                 options: {
                     spawn: false
                 }
             },
             img: {
-                files: ['resources/img/**'],
+                files: ['assets/img/**'],
                 tasks: ['copy'],
                 options: {
                     spawn: false
@@ -106,9 +106,9 @@ module.exports = function (grunt) {
             dynamic: {
                 files: [{
                     expand: true,
-                    cwd: 'resources/img',
+                    cwd: 'assets/img',
                     src: ['**/*.{png,jpg,gif}'],
-                    dest: 'public/img'
+                    dest: 'static/img'
                 }]
             }
         }
