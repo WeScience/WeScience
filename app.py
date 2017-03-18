@@ -17,11 +17,11 @@ def projectEvent(eventid):
 
 # API Routes
 @app.route("/api/project/<int:projectid>")
-def project(projectid):
+def apiProject(projectid):
 	return "api project"
 
 @app.route("/api/project/<int:projectid>/<int:eventid>")
-def projectEvent(eventid):
+def apiProjectEvent(eventid):
 	return "api project -> event"
 
 if __name__ == "__main__":
