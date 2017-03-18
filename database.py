@@ -35,16 +35,6 @@ class users(db.Model):
 	def __repr__(self):
 		return '<User %r>' % self.email
 
-class UserSchema(Schema):
-    email = fields.Email()
-    password = fields.String()
-    name = fields.String()
-    institution = fields.String()
-    position = fields.String()
-    avatar = fields.String()
-    twitter = fields.String()
-    
-
 class roles_users(db.Model):
 	user_id = db.Column(db.Integer, primary_key=True)
 	role = db.Column(db.String(120))
