@@ -2,13 +2,14 @@
 
 apt-get update
 
-apt-get install build-essential libssl-dev libffi-dev python3-dev
-apt-get install python-pip
+apt-get install -yqq build-essential libssl-dev libffi-dev python3-dev
+apt-get install -yqq python-pip
 
 pip install --upgrade pip
 pip install Flask
 
 cd /vagrant
+export FLASK_DEBUG=1; export FLASK_APP=app.py
 
 echo "
 ****************************
@@ -20,6 +21,7 @@ Umm yeah it should be up now.
 vagrant ssh
 cd /vagrant
 export FLASK_DEBUG=1; export FLASK_APP=app.py
+flask run --host=0.0.0.0
 You can access the Hack24 app on http://192.168.10.200:5000/
 
 ****************************
