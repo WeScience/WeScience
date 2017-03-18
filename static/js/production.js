@@ -1,9 +1,15 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var _jquery = require("jquery");
+// Importing jQuery in ES6 style
+
+var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
+
+var _dashboard = require('./pages/dashboard.js');
+
+var _dashboard2 = _interopRequireDefault(_dashboard);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12,10 +18,26 @@ window.jQuery = window.$ = _jquery2.default;
 
 // ES6 import does not work it throws error: Missing jQuery
 // using Node.js style import works without problems
-// Importing jQuery in ES6 style
-require('bootstrap-sass'); //x
+require('bootstrap-sass');
 
-},{"bootstrap-sass":2,"jquery":3}],2:[function(require,module,exports){
+if ((0, _jquery2.default)('.dashboard').length) (0, _dashboard2.default)().init();
+
+},{"./pages/dashboard.js":2,"bootstrap-sass":3,"jquery":4}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = dashboard;
+function dashboard() {
+    return {
+        init: function init() {
+            console.log("INIT");
+        }
+    };
+};
+
+},{}],3:[function(require,module,exports){
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -2394,7 +2416,7 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.0
  * https://jquery.com/
