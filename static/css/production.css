@@ -5549,11 +5549,11 @@ button.close {
   .carousel-indicators {
     bottom: 20px; } }
 
-.clearfix:before, nav.project-nav ul:before, .clearfix:after, nav.project-nav ul:after {
+.clearfix:before, nav.project-nav ul:before, .profile-projects .tab-pane:before, .clearfix:after, nav.project-nav ul:after, .profile-projects .tab-pane:after {
   content: " ";
   display: table; }
 
-.clearfix:after, nav.project-nav ul:after {
+.clearfix:after, nav.project-nav ul:after, .profile-projects .tab-pane:after {
   clear: both; }
 
 .center-block {
@@ -8087,6 +8087,17 @@ button.close {
   overflow: visible;
   clip: auto; }
 
+a, i {
+  -webkit-transition: all .5s ease;
+          transition: all .5s ease; }
+
+.card, a.project-stub {
+  text-decoration: none;
+  color: #333;
+  padding: 15px;
+  border: 1px solid #FFF8E8;
+  box-shadow: 1px 1px 2px #888; }
+
 nav.project-nav {
   background: #2D2D2A; }
   nav.project-nav ul {
@@ -8128,3 +8139,25 @@ nav.project-nav {
   font-size: 1em;
   font-weight: bold;
   margin: 0; }
+
+.profile-projects {
+  margin-top: 40px; }
+
+a.project-stub {
+  width: 300px;
+  margin: 15px 30px 15px 0;
+  float: left; }
+  a.project-stub i {
+    float: left;
+    margin: 0 15px 0 15px;
+    font-size: 3em;
+    color: #348049; }
+  a.project-stub h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.2em;
+    text-transform: uppercase; }
+  a.project-stub:hover {
+    background: #348049;
+    color: #FFF8E8; }
+    a.project-stub:hover i {
+      color: #FFF8E8; }

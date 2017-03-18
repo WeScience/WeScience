@@ -1,0 +1,31 @@
+.profile-projects {
+    margin-top: 40px;
+    .tab-pane {
+        @extend .clearfix;
+    }
+}
+
+a.project-stub {
+    @extend .card;
+    width: 300px;
+    margin: 15px 30px 15px 0;
+    float: left;
+    i {
+        float: left;
+        margin: 0 15px 0 15px;
+        font-size: 3em;
+        color: $brand-primary;
+    }
+    h3 {
+        margin: 0 0 15px 0;
+        font-size: 1.2em;
+        text-transform: uppercase;
+    }
+    &:hover {
+        background: $brand-primary;
+        color: $text-cream;
+        i {
+            color: $text-cream;
+        }
+    }
+}

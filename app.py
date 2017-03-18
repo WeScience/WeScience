@@ -16,6 +16,10 @@ def project(projectid):
 def projectEvent(projectid, eventid):
 	return render_template('event.html')
 
+@app.route("/profile/<int:userid>", defaults={'userid': None})
+def profile(userid):
+    return render_template('profile.html')
+
 # API Routes
 @app.route("/api/user/<int:userid>")
 def apiUser(userid):
