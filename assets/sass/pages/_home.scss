@@ -1,0 +1,13 @@
+.textCenter{text-align: center;}
+
+/*Shrinks navbar after scrolldown*/
+.small #logoMob img{
+    height: 50px;
+    opacity: 0.7 !important;
+}
+.small li > a{
+    line-height: 30px !important;
+}
+.small{
+     background: rgba( 45, 45, 42, 0.7);
+}

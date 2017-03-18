@@ -1,17 +1,107 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-// Importing jQuery in ES6 style
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = api;
 
 var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _dashboard = require('./pages/dashboard.js');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function api() {
+    return {
+        get: function get(url, callback) {
+            _jquery2.default.get(url, function (response) {
+                callback(response);
+            }, 'json');
+        }
+    };
+}
+
+},{"jquery":6}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = projects;
+
+var _api = require('./api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function projects() {
+
+    return {
+        search: function search(user_id, callback) {
+            (0, _api2.default)().get('/api/comments/' + 1, callback);
+        }
+    };
+}
+
+},{"./api":1}],3:[function(require,module,exports){
+"use strict";
+
+var _jquery = require("jquery");
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _dashboard = require("./pages/dashboard.js");
 
 var _dashboard2 = _interopRequireDefault(_dashboard);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+console.log("Working");
+
+var base_w = window.innerWidth / 2;
+var base_h = window.innerWidth / 2;
+
+for (var i = 0; i < 10; i++) {
+    (0, _jquery2.default)("#wrapper").append("<div class='circle" + i + " sub-border'></div>");
+    //set current circle width
+    (0, _jquery2.default)(".circle" + i).css("width", base_w - 40 * i);
+    //set current circle height
+    (0, _jquery2.default)(".circle" + i).css("height", base_h - 40 * i);
+    //get half current width
+    var cur_w = (0, _jquery2.default)(".circle" + i).width() / 2;
+    //get half current height
+    var cur_h = (0, _jquery2.default)(".circle" + i).height() / 2;
+
+    if (i !== 0) {
+        //get half previous width
+        var pre_w = (0, _jquery2.default)(".circle" + (i - 1)).width() / 2;
+        //get half previous height
+        var pre_h = (0, _jquery2.default)(".circle" + (i - 1)).height() / 2;
+        //get previous position
+        var pre_top = (0, _jquery2.default)(".circle" + (i - 1)).position().top;
+        var pre_left = (0, _jquery2.default)(".circle" + (i - 1)).position().left;
+
+        //set current position
+        (0, _jquery2.default)(".circle" + i).css("top", pre_top + pre_h - cur_h);
+        (0, _jquery2.default)(".circle" + i).css("left", pre_left + pre_w - cur_w);
+    } else {
+        //first circle        
+        (0, _jquery2.default)(".circle" + i).css("top", 0);
+        (0, _jquery2.default)(".circle" + i).css("left", base_h - cur_w);
+    }
+    //rotate animation
+    (0, _jquery2.default)(".circle" + i).css("-webkit-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
+    (0, _jquery2.default)(".circle" + i).css("-moz-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
+    (0, _jquery2.default)(".circle" + i).css("-o-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
+    (0, _jquery2.default)(".circle" + i).css("-ms-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
+}
+
+'use strict';
+
+// Importing jQuery in ES6 style
+
 
 // We need to expose jQuery as global variable
 window.jQuery = window.$ = _jquery2.default;
@@ -22,22 +112,31 @@ require('bootstrap-sass');
 
 if ((0, _jquery2.default)('.dashboard').length) (0, _dashboard2.default)().init();
 
-},{"./pages/dashboard.js":2,"bootstrap-sass":3,"jquery":4}],2:[function(require,module,exports){
+},{"./pages/dashboard.js":4,"bootstrap-sass":5,"jquery":6}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = dashboard;
+
+var _projects = require('../api/projects');
+
+var _projects2 = _interopRequireDefault(_projects);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function dashboard() {
     return {
         init: function init() {
-            console.log("INIT");
+            (0, _projects2.default)().search(null, function (response) {
+                console.log(response);
+            });
         }
     };
 };
 
-},{}],3:[function(require,module,exports){
+},{"../api/projects":2}],5:[function(require,module,exports){
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -2416,7 +2515,7 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.0
  * https://jquery.com/
@@ -12662,4 +12761,4 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[1]);
+},{}]},{},[3]);

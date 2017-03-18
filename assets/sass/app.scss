@@ -3,10 +3,12 @@
 @import "../../node_modules/font-awesome/scss/font-awesome";
 @import "base/defaults";
 
+@import "elements/nav";
 @import "elements/card";
 @import "elements/notifications";
 
 @import "pages/event";
 @import "pages/project";
+@import "pages/home";
 @import "pages/profile";
 @import "pages/dashboard";

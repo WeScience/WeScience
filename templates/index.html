@@ -1,4 +1,41 @@
 {% extends "common/layout.html" %}
 {% block body %}
-Index Page
+
+<div id="skiptocontent">
+</div>
+
+
+
+
+<div class="jumbotron" id='home'>
+</div>
+
+
+<div class="container backHL">
+    <div class="row">
+        <div class="col-sm-6">
+            <h3 class="textLight">Login</h3>
+            <label class="textLight" for="usr">Name:</label>
+            <input type="text" class="form-control" id="usr">
+            <label class="textLight" for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+            <br>
+            <button type="button" class="btn btn-success">Login</button>
+        </div>
+        <div class="col-sm-6">
+            <h3 class="textHL">Sign Up</h3>
+            <label class="textLight" for="usr">Name:</label>
+            <input type="text" class="form-control" id="usr">
+            <label class="textLight" for="usr">Email:</label>
+            <input type="text" class="form-control" id="usr">
+            <label class="textLight" for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+            <label class="textLight" for="pwd">Confirm Password:</label>
+            <input type="password" class="form-control" id="pwd">
+            <br>
+            <button type="button" class="btn btn-info">Sign Up</button>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

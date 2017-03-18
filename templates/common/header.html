@@ -1,16 +1,35 @@
 <header id="page-header" class="row">
-  <section id="logo" class="col-md-6">
-    <h1><i class="fa fa-envira" aria-hidden="true"></i> WeScience</h1>
-  </section>
-  <section id="main-nav-container" class=".col-md-6">
-    <section class="mobile">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-    </section>
-    <nav id="main-nav" class="navigation">
-      <ul class="menu">
-        <li>Dashboard</li>
-        <li>Profile</li>
-      </ul>
+    <nav class="navbar navbar-fixed-top navbar-custom">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <!-- 3 bar icon for opening navbar on mobile -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navToggle">
+                    <span class="icon-bar backLight"></span>
+                    <span class="icon-bar backLight"></span>
+                    <span class="icon-bar backLight"></span>
+                </button>
+                <i class="fa fa-envira back fa-5x  hidden-sm hidden-md hidden-lg hidden-xl" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navToggle">
+            <div class="logo">
+                <i class="fa fa-envira back fa-5x hidden-xs" aria-hidden="true"></i> We Science
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-link textLight btn-scroll" href="#home" data-toggle="collapse" data-target=".navbar-collapse.in">Home</a>
+                </li>
+                <li>
+                    <a class="nav-link textLight btn-scroll" href="#about" data-toggle="collapse" data-target=".navbar-collapse.in">About Us</a>
+                </li>
+                <li>
+                    <a class="nav-link textLight btn-scroll" href="#login" data-toggle="collapse" data-target=".navbar-collapse.in">Login </a>
+                </li>
+                <li>
+                    <a class="nav-link textLight btn-scroll" href="#signup" data-toggle="collapse" data-target=".navbar-collapse.in">Sign Up</a>
+                </li>
+            </ul>
+        </div>
     </nav>
-  </section>
 </header>

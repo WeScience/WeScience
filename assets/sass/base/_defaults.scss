@@ -1,3 +1,39 @@
 a, i {
     transition: all .5s ease;
 }
+
+.textDark {
+    color: $text-color !important;
+}
+
+.textLight {
+    color: $text-light !important;
+}
+
+.textCream {
+    color: $text-cream !important;
+}
+
+.textHL {
+    color: $brand-secondary !important;
+}
+
+.backDark {
+    background-color: $background-dark !important;
+}
+
+.backLight {
+    background-color: $background-light !important;
+}
+
+.backCream {
+    background-color: #f9f9f9 !important;
+}
+
+.backHL {
+    background-color: $brand-primary !important;
+}
+
+.backWhite {
+    background-color: #FFFFFF !important;
+}

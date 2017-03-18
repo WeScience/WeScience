@@ -1,9 +1,13 @@
 'use strict';
 
+import projects from '../api/projects';
+
 export default function dashboard() {
     return {
         init: function() {
-            console.log("INIT");
+            projects().search(null, function(response) {
+                console.log(response);
+            });
         }
     };
 };

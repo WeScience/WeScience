@@ -25,6 +25,10 @@ def profile(userid):
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route("/new")
+def new():
+    return render_template('new.html')
+
 # API Routes
 @app.route("/api/user/<int:userid>")
 def apiUser(userid):
@@ -40,6 +44,11 @@ def apiUser(userid):
 		"twitter" : user.twitter
 	}
 	return jsonify(userJson)
+
+@app.route("/api/project")
+def apiProjectSearch(userid):
+	user = database.users.query.filter_by(id=userid).first()
+	return jsonify(user)
 
 @app.route("/api/project/<int:projectid>")
 def apiProject(projectid):
