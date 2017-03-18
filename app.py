@@ -9,7 +9,7 @@ def index():
 
 @app.route("/project/<int:projectid>")
 def project(projectid):
-	database.projects.query.filter_by(id=project).first()
+	project = database.projects.query.filter_by(id=project).first()
 	return "project"
 
 @app.route("/project/<int:projectid>/<int:eventid>")
