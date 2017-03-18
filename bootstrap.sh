@@ -3,10 +3,12 @@
 apt-get update
 
 apt-get install -yqq build-essential libssl-dev libffi-dev python3-dev
-apt-get install -yqq python-pip
+apt-get install -yqq python3-pip
 
-pip install --upgrade pip
-pip install Flask
+pip3 install --upgrade pip3
+pip3 install Flask
+
+pip3 install flask_sqlalchemy
 
 cd /vagrant
 export FLASK_DEBUG=1; export FLASK_APP=app.py
