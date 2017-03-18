@@ -8,7 +8,7 @@ db.drop_all()
 db.create_all()
 
 #add user
-user = users('us@hack24.co.uk', 'hack24', 'ateamwithnoname', 'hack24', '')
+user = users('us@hack24.co.uk', 'hack24', 'ateamwithnoname', 'boss', 'hack24', 'http://www.mikeresoli.co.uk/static/img/avatar.png', '@hack24')
 db.session.add(user)
 
 #add roles
