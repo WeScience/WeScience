@@ -1,0 +1,69 @@
+.textDark{color:#2D2D2A !important;}
+.textLight{color:#F2EFEA !important;}
+.textCream{color:#FFF8E8 !important;}
+.textHL{color:#387780!important;}
+
+.backDark{background-color:#2D2D2A !important;}
+.backLight{background-color:#F2EFEA!important;}
+.backCream{background-color:#FFF8E8 !important;}
+.backHL{background-color:#387780 !important;}
+.backWhite{background-color:#FFFFFF !important;}
+
+.textCenter{text-align: center;}
+
+.navbar-custom {
+    border-radius:0;
+    margin-bottom: 0px;
+    /* Have to set background manually for correct transparency*/
+    background: rgba( 67, 140, 8, 0.9);
+}
+
+.navbar-custom .navbar-nav > li > a {
+    font-size: 16px !important;
+
+    padding-left: 3vw;
+    padding-right: 3vw;
+}
+
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    background-color:transparent;
+}
+
+.nav>li>a:focus, .nav>li>a:hover{
+     background: rgba( 67, 120, 8, 0.7) !important;
+     color:#EFEFEF;
+}
+
+.nav-link{
+    text-align: right;
+    opacity: 1 !important;
+}
+
+/*Shrinks navbar after scrolldown*/
+.small #logoMob img{
+    height: 50px;
+    opacity: 0.7 !important;
+}
+.small li > a{
+    line-height: 30px !important;
+}
+.small{
+     background: rgba( 45, 45, 42, 0.7);
+}
+
+/*Shows mobile version of logo*/
+#logoMob{
+    display: inline;
+}
+#logoMob img{
+    height: 100px;
+    opacity: 1 !important;
+}
+
+/*Hides desktop version of logo*/
+#logoDesk {
+    display: none;
+}
+#logoDesk{
+    opacity: 1 !important;
+}
