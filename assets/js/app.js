@@ -1,3 +1,4 @@
+
 console.log("Working");
 
 var base_w = window.innerWidth / 2;
@@ -39,3 +40,18 @@ for(var i = 0;i < 10;i++){
     $(".circle"+i).css("-o-animation","spin "+(i+1)*1.5+"s infinite linear");
     $(".circle"+i).css("-ms-animation","spin "+(i+1)*1.5+"s infinite linear");
 }
+
+'use strict';
+
+// Importing jQuery in ES6 style
+import $ from "jquery";
+import dashboard from './pages/dashboard.js'
+
+// We need to expose jQuery as global variable
+window.jQuery = window.$ = $;
+
+// ES6 import does not work it throws error: Missing jQuery
+// using Node.js style import works without problems
+require('bootstrap-sass');
+
+if ($('.dashboard').length) dashboard().init();

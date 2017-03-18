@@ -16,9 +16,22 @@ def project(projectid):
 def projectEvent(projectid, eventid):
 	return render_template('event.html')
 
+@app.route("/profile/<int:userid>", defaults={'userid': None})
+def profile(userid):
+    return render_template('profile.html')
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template('dashboard.html')
+
 # API Routes
 @app.route("/api/user/<int:userid>")
 def apiUser(userid):
+	user = database.users.query.filter_by(id=userid).first()
+	return jsonify(user)
+
+@app.route("/api/project")
+def apiProjectSearch(userid):
 	user = database.users.query.filter_by(id=userid).first()
 	return jsonify(user)
 

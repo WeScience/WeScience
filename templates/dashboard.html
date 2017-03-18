@@ -1,0 +1,53 @@
+{% extends "common/layout.html" %}
+{% block body %}
+
+<div class="container dashboard">
+    <h1>The very beginning<br><small>A very good place to start</small></h1>
+
+    <div class="clearfix">
+        <a href="#" class="btn btn-primary btn-lg pull-right">Create New Project</a>
+    </div>
+
+    <div class="dashboard-projects">
+        <h2>Your Projects</h2>
+        {% include "components/project-list.html" %}
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <ul class="notifications">
+                <h3>Notifications</h3>
+                <li>
+                    <span><a href="#">Bob Smith</a> commented on your document</span>
+                    <time>7:34pm, 18th March 2017</time>
+                    <a href="#" class="view">view</a>
+                </li>
+                <li>
+                    <span><a href="#">Bob Smith</a> commented on your document</span>
+                    <time>7:34pm, 18th March 2017</time>
+                    <a href="#" class="view">view</a>
+                </li>
+                <li>
+                    <span><a href="#">Bob Smith</a> commented on your document</span>
+                    <time>7:34pm, 18th March 2017</time>
+                    <a href="#" class="view">view</a>
+                </li>
+                <li>
+                    <span><a href="#">Bob Smith</a> commented on your document</span>
+                    <time>7:34pm, 18th March 2017</time>
+                    <a href="#" class="view">view</a>
+                </li>
+                <li>
+                    <span><a href="#">Bob Smith</a> commented on your document</span>
+                    <time>7:34pm, 18th March 2017</time>
+                    <a href="#" class="view">view</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <h3>News and Articles</h3>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
