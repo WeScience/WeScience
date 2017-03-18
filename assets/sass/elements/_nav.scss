@@ -1,0 +1,27 @@
+.navbar-custom {
+    border-radius:0;
+    margin-bottom: 0px;
+    /* Have to set background manually for correct transparency*/
+    background: rgba( 67, 140, 8, 0.9);
+}
+
+.navbar-custom .navbar-nav > li > a {
+    font-size: 16px !important;
+
+    padding-left: 3vw;
+    padding-right: 3vw;
+}
+
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    background-color:transparent;
+}
+
+.nav>li>a:focus, .nav>li>a:hover{
+    background: rgba( 67, 120, 8, 0.7) !important;
+    color:#EFEFEF;
+}
+
+.nav-link{
+    text-align: right;
+    opacity: 1 !important;
+}
