@@ -66,6 +66,37 @@ while count <= 50:
 	db.session.add(comment)
 	count += 1
 
+#add document types
+doctype0 = document_types('Research request')
+doctype1 = document_types('Hypothesis')
+doctype2 = document_types('Methodology')
+doctype3 = document_types('Research results')
+doctype4 = document_types('Interpretation')
+doctype5 = document_types('Review')
+doctype6 = document_types('Milestone')
+db.session.add(doctype0)
+db.session.add(doctype1)
+db.session.add(doctype2)
+db.session.add(doctype3)
+db.session.add(doctype4)
+db.session.add(doctype5)
+db.session.add(doctype6)
+
+#add documents
+document0 = documents(random.choice(documentIds), 'Document 1', 'Document 1 Desc')
+document1 = documents(random.choice(documentIds), 'Document 2', 'Document 2 Desc')
+document2 = documents(random.choice(documentIds), 'Document 3', 'Document 3 Desc')
+document3 = documents(random.choice(documentIds), 'Document 4', 'Document 4 Desc')
+document4 = documents(random.choice(documentIds), 'Document 5', 'Document 5 Desc')
+document5 = documents(random.choice(documentIds), 'Document 6', 'Document 6 Desc')
+document6 = documents(random.choice(documentIds), 'Document 7', 'Document 7 Desc')
+db.session.add(document0)
+db.session.add(document1)
+db.session.add(document2)
+db.session.add(document3)
+db.session.add(document4)
+db.session.add(document5)
+db.session.add(document6)
 
 
 #commit to db
