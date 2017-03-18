@@ -1,10 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from marshmallow import Schema, fields
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
-
 
 class users(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -25,8 +25,26 @@ class users(db.Model):
 		self.avatar = avatar
 		self.twitter = twitter
 
+	@property
+	def serialize(self):
+		"""Return object data in easily serializeable format"""
+		return {
+		   'id' : self.id,
+			'email': self.email,
+	}
+
 	def __repr__(self):
 		return '<User %r>' % self.email
+
+class UserSchema(Schema):
+    email = fields.Email()
+    password = fields.String()
+    name = fields.String()
+    institution = fields.String()
+    position = fields.String()
+    avatar = fields.String()
+    twitter = fields.String()
+    
 
 class roles_users(db.Model):
 	user_id = db.Column(db.Integer, primary_key=True)
@@ -53,12 +71,16 @@ class projects(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	project_name = db.Column(db.String(120))
 	start_date = db.Column(db.String(120))
+	end_date = db.Column(db.String(120))
 	description = db.Column(db.String(120))
 	isPublic = db.Column(db.Integer, default='0')
 
-	def __init__(self, project_name, start_date):
+	def __init__(self, project_name, start_date, end_date, description, isPublic):
 		self.project_name = project_name
 		self.start_date = start_date
+		self.end_date = end_date
+		self.description = description
+		self.isPublic = isPublic
 
 	def __repr__(self):
 		return '<Project %r>' % self.project_name
@@ -78,7 +100,7 @@ class projects_users(db.Model):
 
 class documents(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	document_type = db.Column(db.String(120))
+	document_type = db.Column(db.Integer)
 	document_title = db.Column(db.String(120))
 	document_description = db.Column(db.String(120))
 
