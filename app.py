@@ -20,6 +20,10 @@ def projectEvent(projectid, eventid):
 def profile(userid):
     return render_template('profile.html')
 
+@app.route("/dashboard")
+def dashboard():
+    return render_template('dashboard.html')
+
 # API Routes
 @app.route("/api/user/<int:userid>")
 def apiUser(userid):

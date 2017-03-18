@@ -7,8 +7,8 @@
 
 a.project-stub {
     @extend .card;
-    width: 300px;
-    margin: 15px 30px 15px 0;
+    width: 370px;
+    margin: 8px 15px 7px 0;
     float: left;
     i {
         float: left;
@@ -27,5 +27,8 @@ a.project-stub {
         i {
             color: $text-cream;
         }
+    }
+    &:nth-child(n + 3) {
+        margin-right: 0;
     }
 }
