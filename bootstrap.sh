@@ -3,9 +3,10 @@
 apt-get update
 
 apt-get install build-essential libssl-dev libffi-dev python3-dev
+apt-get install python-pip
 
-pip3 install --upgrade pip3
-pip3 install Flask
+pip install --upgrade pip
+pip install Flask
 
 cd /vagrant
 
