@@ -2,17 +2,44 @@
 {% block body %}
 
 <div class="container">
+    <h1>This is the name of the document</h1>
     <div class="row">
         <div class="col-sm-6">
-            <h1>This is the name of the document</h1>
 
+            <h3>Download File</h3>
             <div class="download">
-                <a href="#"><i class="fa fa-download"></i> my-research-proposal.docx</a>
+                <i class="fa fa-download"></i> &nbsp; <a href="#">my-research-proposal.docx (version 4)</a><br>
+                <small>last update 14th March 2017</small>
             </div>
+
+            <h3>Previous Revisions</h3>
+            <ul class="revisions">
+               <li>
+                   <i class="fa fa-download"></i> &nbsp; <a href="#">my-research-proposal.docx (version 3)</a><br>
+                   <small>12th March 2017</small>
+               </li>
+                <li>
+                    <i class="fa fa-download"></i> &nbsp; <a href="#">my-research-proposal.docx (version 2)</a><br>
+                    <small>10th March 2017</small>
+                </li>
+                <li>
+                    <i class="fa fa-download"></i> &nbsp; <a href="#">my-research-proposal.docx (version 1)</a><br>
+                    <small>2nd March 2017</small>
+                </li>
+            </ul>
         </div>
 
         <div class="col-sm-6">
-            <h2>Comments</h2>
+            <h3>Comments</h3>
+            <form id="newComment">
+                <div class="form-group">
+                    <label for="newComment" class="sr-only">Add a comment</label>
+                    <textarea name="comment" class="form-control" placeholder="Add a comment"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Add Comment</button>
+                </div>
+            </form>
             <div class="conversation-item">
                 <div class="conversation-user">
                     <img src="#" width="60" alt="">
