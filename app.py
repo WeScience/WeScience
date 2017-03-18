@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import database
 app = Flask(__name__)
 
@@ -9,7 +9,7 @@ def index():
 
 @app.route("/project/<int:projectid>")
 def project(projectid):
-	database.projects.query.filter_by(id=project).first()
+	project = database.projects.query.filter_by(id=project).first()
 	return "project"
 
 @app.route("/project/<int:projectid>/<int:eventid>")
@@ -19,11 +19,13 @@ def projectEvent(projectid, eventid):
 # API Routes
 @app.route("/api/project/<int:projectid>")
 def apiProject(projectid):
-	return "api project"
+	project = database.projects.query.filter_by(id=project).first()
+	return jsonify(project)
 
 @app.route("/api/project/<int:projectid>/<int:eventid>")
 def apiProjectEvent(eventid):
-	return "api project -> event"
+	event = database.events.query.filter_by(id=eventid).first()
+	return jsonify(event)
 
 if __name__ == "__main__":
 	app.run()
