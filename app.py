@@ -7,11 +7,11 @@ def index():
 	return render_template('index.html', name=name)
 
 @app.route("/project/<int:projectid>")
-def project():
+def project(projectid):
 	return "project"
 
 @app.route("/project/<int:projectid>/<int:eventid>")
-def project():
+def projectEvent(eventid):
 	return "project -> event"
 
 if __name__ == "__main__":
