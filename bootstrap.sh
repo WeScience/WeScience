@@ -2,10 +2,9 @@
 
 apt-get update
 
-apt-get install python-dev python-pip -q -y
-sudo apt-get install -y supervisor
+apt-get install build-essential libssl-dev libffi-dev python3-dev
 
-pip install --upgrade pip
+pip install --upgrade pip3
 pip install Flask
 
 cd /vagrant
