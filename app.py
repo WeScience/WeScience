@@ -24,7 +24,8 @@ def apiProject(projectid):
 
 @app.route("/api/project/<int:projectid>/<int:eventid>")
 def apiProjectEvent(eventid):
-	return "api project -> event"
+	event = database.events.query.filter_by(id=eventid).first()
+	return jsonify(event)
 
 if __name__ == "__main__":
 	app.run()
