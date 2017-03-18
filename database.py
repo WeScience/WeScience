@@ -8,19 +8,22 @@ db = SQLAlchemy(app)
 
 class users(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	email = db.Column(db.String(120), unique=True)
+	email = db.Column(db.String(120))
 	password = db.Column(db.String(120))
 	name = db.Column(db.String(120))
 	institution = db.Column(db.String(120))
+	position = db.Column(db.String(120))
 	avatar = db.Column(db.String(120))
+	twitter = db.Column(db.String(120))
 
-	def __init__(self, email, password, name, institution, avatar):
-		self.id = id
+	def __init__(self, email, password, name, institution, position, avatar, twitter):
 		self.email = email
 		self.password = password
 		self.name = name
 		self.institution = institution
+		self.position = position
 		self.avatar = avatar
+		self.twitter = twitter
 
 	def __repr__(self):
 		return '<User %r>' % self.email
@@ -29,7 +32,7 @@ class roles_users(db.Model):
 	user_id = db.Column(db.Integer, primary_key=True)
 	role = db.Column(db.String(120))
 
-	def __init__(self, role):
+	def __init__(self, user_id, role):
 		self.user_id = user_id
 		self.role = role
 
@@ -50,6 +53,8 @@ class projects(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	project_name = db.Column(db.String(120))
 	start_date = db.Column(db.String(120))
+	description = db.Column(db.String(120))
+	isPublic = db.Column(db.Integer, default='0')
 
 	def __init__(self, project_name, start_date):
 		self.project_name = project_name
@@ -63,7 +68,8 @@ class projects_users(db.Model):
 	project_id = db.Column(db.Integer)
 	permission_level = db.Column(db.Integer)
 
-	def __init__(self, project_id, permission_level):
+	def __init__(self, user_id, project_id, permission_level):
+		self.user_id = user_id
 		self.project_id = project_id
 		self.permission_level = permission_level
 
@@ -101,7 +107,7 @@ class events(db.Model):
 	filename = db.Column(db.String(120))
 	created = db.Column(db.String(120))
 
-	def __init__(self, id):
+	def __init__(self, document_id, project_id, filename, created):
 		self.document_id = document_id
 		self.project_id = project_id
 		self.filename = filename
@@ -118,7 +124,7 @@ class comments(db.Model):
 	created = db.Column(db.String(120))
 
 
-	def __init__(self, id):
+	def __init__(self, user_id, document_id, comment, created):
 		self.user_id = user_id
 		self.document_id = document_id
 		self.comment = comment
