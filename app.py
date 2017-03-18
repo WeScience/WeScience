@@ -12,8 +12,8 @@ def project(projectid):
 	return "project"
 
 @app.route("/project/<int:projectid>/<int:eventid>")
-def projectEvent(eventid):
-	return "project -> event"
+def projectEvent(projectid, eventid):
+	return render_template('event.html')
 
 # API Routes
 @app.route("/api/project/<int:projectid>")
