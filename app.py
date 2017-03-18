@@ -1,12 +1,11 @@
 from flask import Flask, render_template
-from database import db, UserDB
+import database
 app = Flask(__name__)
 
 # View Routes
 @app.route("/")
 def index():
-	name = "hack24";
-	return render_template('index.html', name=name)
+	return render_template('index.html')
 
 @app.route("/project/<int:projectid>")
 def project(projectid):
@@ -17,7 +16,7 @@ def projectEvent(eventid):
 	return "project -> event"
 
 # API Routes
-@app.route("/api//project/<int:projectid>")
+@app.route("/api/project/<int:projectid>")
 def project(projectid):
 	return "api project"
 
