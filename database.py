@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Integer, ForeignKey, String, Column
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -23,14 +24,6 @@ class users(db.Model):
 		self.position = position
 		self.avatar = avatar
 		self.twitter = twitter
-
-	@property
-	def serialize(self):
-		"""Return object data in easily serializeable format"""
-		return {
-		   'id' : self.id,
-			'email': self.email,
-	}
 
 	def __repr__(self):
 		return '<User %r>' % self.email
@@ -76,7 +69,7 @@ class projects(db.Model):
 
 class projects_users(db.Model):
 	user_id = db.Column(db.Integer, primary_key=True)
-	project_id = db.Column(db.Integer)
+	project_id = db.Column(db.Integer, ForeignKey('projects.id'))
 	permission_level = db.Column(db.Integer)
 
 	def __init__(self, user_id, project_id, permission_level):
@@ -113,16 +106,18 @@ class document_types(db.Model):
 
 class events(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	document_id = db.Column(db.Integer)
-	project_id = db.Column(db.Integer)
+	document_id = db.Column(db.Integer, ForeignKey('documents.id'))
+	project_id = db.Column(db.Integer, ForeignKey('projects.id'))
 	filename = db.Column(db.String(120))
 	created = db.Column(db.String(120))
+	user_id = db.Column(db.Integer, ForeignKey('users.id'))
 
-	def __init__(self, document_id, project_id, filename, created):
+	def __init__(self, document_id, project_id, filename, created, user_id):
 		self.document_id = document_id
 		self.project_id = project_id
 		self.filename = filename
 		self.created = created		
+		self.user_id = user_id
 
 	def __repr__(self):
 		return '<Event %r>' % self.id

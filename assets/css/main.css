@@ -68,7 +68,7 @@ mark {
   background: #ff0;
   color: #000; }
 
-small, ul.notifications li time {
+small, ul.notifications li time, .commit-list li time {
   font-size: 80%; }
 
 sub,
@@ -1142,21 +1142,23 @@ h1, h2, h3, h4, h5, h6,
   font-weight: 300;
   line-height: 1.1;
   color: inherit; }
-  h1 small, h1 ul.notifications li time, ul.notifications li h1 time,
-  h1 .small, h2 small, h2 ul.notifications li time, ul.notifications li h2 time,
-  h2 .small, h3 small, h3 ul.notifications li time, ul.notifications li h3 time,
-  h3 .small, h4 small, h4 ul.notifications li time, ul.notifications li h4 time,
-  h4 .small, h5 small, h5 ul.notifications li time, ul.notifications li h5 time,
-  h5 .small, h6 small, h6 ul.notifications li time, ul.notifications li h6 time,
+  h1 small, h1 ul.notifications li time, ul.notifications li h1 time, h1 .commit-list li time, .commit-list li h1 time,
+  h1 .small, h2 small, h2 ul.notifications li time, ul.notifications li h2 time, h2 .commit-list li time, .commit-list li h2 time,
+  h2 .small, h3 small, h3 ul.notifications li time, ul.notifications li h3 time, h3 .commit-list li time, .commit-list li h3 time,
+  h3 .small, h4 small, h4 ul.notifications li time, ul.notifications li h4 time, h4 .commit-list li time, .commit-list li h4 time,
+  h4 .small, h5 small, h5 ul.notifications li time, ul.notifications li h5 time, h5 .commit-list li time, .commit-list li h5 time,
+  h5 .small, h6 small, h6 ul.notifications li time, ul.notifications li h6 time, h6 .commit-list li time, .commit-list li h6 time,
   h6 .small,
   .h1 small,
   .h1 ul.notifications li time, ul.notifications li
   .h1 time,
-  .h1 .small, .h2 small, .h2 ul.notifications li time, ul.notifications li .h2 time,
-  .h2 .small, .h3 small, .h3 ul.notifications li time, ul.notifications li .h3 time,
-  .h3 .small, .h4 small, .h4 ul.notifications li time, ul.notifications li .h4 time,
-  .h4 .small, .h5 small, .h5 ul.notifications li time, ul.notifications li .h5 time,
-  .h5 .small, .h6 small, .h6 ul.notifications li time, ul.notifications li .h6 time,
+  .h1 .commit-list li time, .commit-list li
+  .h1 time,
+  .h1 .small, .h2 small, .h2 ul.notifications li time, ul.notifications li .h2 time, .h2 .commit-list li time, .commit-list li .h2 time,
+  .h2 .small, .h3 small, .h3 ul.notifications li time, ul.notifications li .h3 time, .h3 .commit-list li time, .commit-list li .h3 time,
+  .h3 .small, .h4 small, .h4 ul.notifications li time, ul.notifications li .h4 time, .h4 .commit-list li time, .commit-list li .h4 time,
+  .h4 .small, .h5 small, .h5 ul.notifications li time, ul.notifications li .h5 time, .h5 .commit-list li time, .commit-list li .h5 time,
+  .h5 .small, .h6 small, .h6 ul.notifications li time, ul.notifications li .h6 time, .h6 .commit-list li time, .commit-list li .h6 time,
   .h6 .small {
     font-weight: normal;
     line-height: 1;
@@ -1167,18 +1169,22 @@ h2, .h2,
 h3, .h3 {
   margin-top: 20px;
   margin-bottom: 10px; }
-  h1 small, h1 ul.notifications li time, ul.notifications li h1 time,
-  h1 .small, .h1 small, .h1 ul.notifications li time, ul.notifications li .h1 time,
+  h1 small, h1 ul.notifications li time, ul.notifications li h1 time, h1 .commit-list li time, .commit-list li h1 time,
+  h1 .small, .h1 small, .h1 ul.notifications li time, ul.notifications li .h1 time, .h1 .commit-list li time, .commit-list li .h1 time,
   .h1 .small,
   h2 small,
   h2 ul.notifications li time, ul.notifications li
   h2 time,
-  h2 .small, .h2 small, .h2 ul.notifications li time, ul.notifications li .h2 time,
+  h2 .commit-list li time, .commit-list li
+  h2 time,
+  h2 .small, .h2 small, .h2 ul.notifications li time, ul.notifications li .h2 time, .h2 .commit-list li time, .commit-list li .h2 time,
   .h2 .small,
   h3 small,
   h3 ul.notifications li time, ul.notifications li
   h3 time,
-  h3 .small, .h3 small, .h3 ul.notifications li time, ul.notifications li .h3 time,
+  h3 .commit-list li time, .commit-list li
+  h3 time,
+  h3 .small, .h3 small, .h3 ul.notifications li time, ul.notifications li .h3 time, .h3 .commit-list li time, .commit-list li .h3 time,
   .h3 .small {
     font-size: 65%; }
 
@@ -1187,18 +1193,22 @@ h5, .h5,
 h6, .h6 {
   margin-top: 10px;
   margin-bottom: 10px; }
-  h4 small, h4 ul.notifications li time, ul.notifications li h4 time,
-  h4 .small, .h4 small, .h4 ul.notifications li time, ul.notifications li .h4 time,
+  h4 small, h4 ul.notifications li time, ul.notifications li h4 time, h4 .commit-list li time, .commit-list li h4 time,
+  h4 .small, .h4 small, .h4 ul.notifications li time, ul.notifications li .h4 time, .h4 .commit-list li time, .commit-list li .h4 time,
   .h4 .small,
   h5 small,
   h5 ul.notifications li time, ul.notifications li
   h5 time,
-  h5 .small, .h5 small, .h5 ul.notifications li time, ul.notifications li .h5 time,
+  h5 .commit-list li time, .commit-list li
+  h5 time,
+  h5 .small, .h5 small, .h5 ul.notifications li time, ul.notifications li .h5 time, .h5 .commit-list li time, .commit-list li .h5 time,
   .h5 .small,
   h6 small,
   h6 ul.notifications li time, ul.notifications li
   h6 time,
-  h6 .small, .h6 small, .h6 ul.notifications li time, ul.notifications li .h6 time,
+  h6 .commit-list li time, .commit-list li
+  h6 time,
+  h6 .small, .h6 small, .h6 ul.notifications li time, ul.notifications li .h6 time, .h6 .commit-list li time, .commit-list li .h6 time,
   .h6 .small {
     font-size: 75%; }
 
@@ -1232,7 +1242,7 @@ p {
     .lead {
       font-size: 21px; } }
 
-small, ul.notifications li time,
+small, ul.notifications li time, .commit-list li time,
 .small {
   font-size: 85%; }
 
@@ -1423,6 +1433,8 @@ blockquote {
   blockquote small,
   blockquote ul.notifications li time, ul.notifications li
   blockquote time,
+  blockquote .commit-list li time, .commit-list li
+  blockquote time,
   blockquote .small {
     display: block;
     font-size: 80%;
@@ -1431,6 +1443,8 @@ blockquote {
     blockquote footer:before,
     blockquote small:before,
     blockquote ul.notifications li time:before, ul.notifications li
+    blockquote time:before,
+    blockquote .commit-list li time:before, .commit-list li
     blockquote time:before,
     blockquote .small:before {
       content: '\2014 \00A0'; }
@@ -1446,10 +1460,14 @@ blockquote.pull-right {
   .blockquote-reverse small:before,
   .blockquote-reverse ul.notifications li time:before, ul.notifications li
   .blockquote-reverse time:before,
+  .blockquote-reverse .commit-list li time:before, .commit-list li
+  .blockquote-reverse time:before,
   .blockquote-reverse .small:before,
   blockquote.pull-right footer:before,
   blockquote.pull-right small:before,
   blockquote.pull-right ul.notifications li time:before, ul.notifications li
+  blockquote.pull-right time:before,
+  blockquote.pull-right .commit-list li time:before, .commit-list li
   blockquote.pull-right time:before,
   blockquote.pull-right .small:before {
     content: ''; }
@@ -1457,10 +1475,14 @@ blockquote.pull-right {
   .blockquote-reverse small:after,
   .blockquote-reverse ul.notifications li time:after, ul.notifications li
   .blockquote-reverse time:after,
+  .blockquote-reverse .commit-list li time:after, .commit-list li
+  .blockquote-reverse time:after,
   .blockquote-reverse .small:after,
   blockquote.pull-right footer:after,
   blockquote.pull-right small:after,
   blockquote.pull-right ul.notifications li time:after, ul.notifications li
+  blockquote.pull-right time:after,
+  blockquote.pull-right .commit-list li time:after, .commit-list li
   blockquote.pull-right time:after,
   blockquote.pull-right .small:after {
     content: '\00A0 \2014'; }
@@ -3189,7 +3211,7 @@ tbody.collapse.in {
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   background-clip: padding-box; }
-  .dropdown-menu.pull-right, ul.notifications li a.dropdown-menu.view {
+  .dropdown-menu.pull-right, ul.notifications li a.dropdown-menu.view, .commit-list li a.dropdown-menu.view {
     right: 0;
     left: auto; }
   .dropdown-menu .divider {
@@ -3257,7 +3279,7 @@ tbody.collapse.in {
   top: 0;
   z-index: 990; }
 
-.pull-right > .dropdown-menu, ul.notifications li a.view > .dropdown-menu {
+.pull-right > .dropdown-menu, ul.notifications li a.view > .dropdown-menu, .commit-list li a.view > .dropdown-menu {
   right: 0;
   left: auto; }
 
@@ -4522,6 +4544,7 @@ a.thumbnail.active {
 
 .media-right,
 .media > .pull-right, ul.notifications li
+.media > a.view, .commit-list li
 .media > a.view {
   padding-left: 10px; }
 
@@ -4603,13 +4626,19 @@ button.list-group-item {
   .list-group-item.active .list-group-item-heading > small,
   .list-group-item.active ul.notifications li .list-group-item-heading > time, ul.notifications li
   .list-group-item.active .list-group-item-heading > time,
+  .list-group-item.active .commit-list li .list-group-item-heading > time, .commit-list li
+  .list-group-item.active .list-group-item-heading > time,
   .list-group-item.active .list-group-item-heading > .small, .list-group-item.active:hover .list-group-item-heading,
   .list-group-item.active:hover .list-group-item-heading > small,
   .list-group-item.active:hover ul.notifications li .list-group-item-heading > time, ul.notifications li
   .list-group-item.active:hover .list-group-item-heading > time,
+  .list-group-item.active:hover .commit-list li .list-group-item-heading > time, .commit-list li
+  .list-group-item.active:hover .list-group-item-heading > time,
   .list-group-item.active:hover .list-group-item-heading > .small, .list-group-item.active:focus .list-group-item-heading,
   .list-group-item.active:focus .list-group-item-heading > small,
   .list-group-item.active:focus ul.notifications li .list-group-item-heading > time, ul.notifications li
+  .list-group-item.active:focus .list-group-item-heading > time,
+  .list-group-item.active:focus .commit-list li .list-group-item-heading > time, .commit-list li
   .list-group-item.active:focus .list-group-item-heading > time,
   .list-group-item.active:focus .list-group-item-heading > .small {
     color: inherit; }
@@ -4747,9 +4776,11 @@ button.list-group-item-danger {
   color: inherit; }
   .panel-title > a,
   .panel-title > small, ul.notifications li
+  .panel-title > time, .commit-list li
   .panel-title > time,
   .panel-title > .small,
   .panel-title > small > a, ul.notifications li
+  .panel-title > time > a, .commit-list li
   .panel-title > time > a,
   .panel-title > .small > a {
     color: inherit; }
@@ -5632,11 +5663,11 @@ button.close {
   .carousel-indicators {
     bottom: 20px; } }
 
-.clearfix:before, ul.notifications li:before, nav.project-nav ul:before, .profile-projects .tab-pane:before, .dashboard-projects:before, .clearfix:after, ul.notifications li:after, nav.project-nav ul:after, .profile-projects .tab-pane:after, .dashboard-projects:after {
+.clearfix:before, ul.notifications li:before, .commit-list li:before, nav.project-nav ul:before, .profile-projects .tab-pane:before, .dashboard-projects:before, .clearfix:after, ul.notifications li:after, .commit-list li:after, nav.project-nav ul:after, .profile-projects .tab-pane:after, .dashboard-projects:after {
   content: " ";
   display: table; }
 
-.clearfix:after, ul.notifications li:after, nav.project-nav ul:after, .profile-projects .tab-pane:after, .dashboard-projects:after {
+.clearfix:after, ul.notifications li:after, .commit-list li:after, nav.project-nav ul:after, .profile-projects .tab-pane:after, .dashboard-projects:after {
   clear: both; }
 
 .center-block {
@@ -5644,7 +5675,7 @@ button.close {
   margin-left: auto;
   margin-right: auto; }
 
-.pull-right, ul.notifications li a.view {
+.pull-right, ul.notifications li a.view, .commit-list li a.view {
   float: right !important; }
 
 .pull-left {
@@ -5922,7 +5953,7 @@ button.close {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
-.pull-right, ul.notifications li a.view {
+.pull-right, ul.notifications li a.view, .commit-list li a.view {
   float: right; }
 
 .pull-left {
@@ -5931,7 +5962,7 @@ button.close {
 .fa.pull-left {
   margin-right: .3em; }
 
-.fa.pull-right, ul.notifications li a.fa.view {
+.fa.pull-right, ul.notifications li a.fa.view, .commit-list li a.fa.view {
   margin-left: .3em; }
 
 .fa-spin {
@@ -8244,6 +8275,16 @@ ul.notifications {
     ul.notifications li span {
       display: block; }
 
+.commit-list {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .commit-list li {
+    line-height: 40px;
+    padding: 6px 24px;
+    background: #f2EFEA;
+    border-bottom: 1px solid #fff; }
+
 #page-header {
   margin: 0 auto;
   width: 100%;
@@ -8386,7 +8427,7 @@ nav.project-nav {
         color: white; }
         .project-documents ul li:hover a:hover {
           text-decoration: none; }
-    .project-documents ul li small, .project-documents ul.notifications li time {
+    .project-documents ul li small, .project-documents ul.notifications li time, .project-documents ul .commit-list li time, .commit-list .project-documents ul li time {
       float: right; }
 
 .project-documents h3 {

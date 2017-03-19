@@ -5,8 +5,8 @@ import $ from "jquery";
 import dashboard from './pages/dashboard.js';
 import home from './pages/home.js';
 import profile from './pages/profile.js';
+import commits from './pages/commits.js';
 import mainNav from './pages/mainNav.js';
-
 // We need to expose jQuery as global variable
 window.jQuery = window.$ = $;
 
@@ -17,3 +17,4 @@ mainNav().init();
 if ($('.dashboard-page').length) dashboard().init();
 if ($('.home-page').length) home().init();
 if ($('.profile-page').length) profile().init();
+if ($('.js-project-commits-page').length) commits().init();

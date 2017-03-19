@@ -10,8 +10,11 @@ def index():
 
 @app.route("/project/<int:projectid>")
 def project(projectid):
-	#project = database.projects.query.filter_by(id=project).first()
 	return render_template('project.html')
+
+@app.route("/project/commits/<int:projectid>")
+def projectCommits(projectid):
+    return render_template('project-commits.html')
 
 @app.route("/project/<int:projectid>/<int:eventid>")
 def projectEvent(projectid, eventid):
@@ -60,13 +63,59 @@ def apiProject(projectid):
 
 @app.route("/api/project/events/<int:projectid>")
 def apiProjectEvent(projectid):
-	events = database.events.query.filter_by(id=projectid)
-	return jsonify(events)
+	documents = database.documents
+	events = database.events
+	users = database.users
+	results = documents.query.join(events).add_columns(events.id, events.filename, events.created, documents.document_title).filter_by(project_id=projectid)
+	# .join(users).join(documents).add_columns(users.name)
+	eventsJson = {}
+	for i in results:
+		json = {
+			"id" : i.id,
+			"filename" : i.filename,
+			"created" : i.created,
+			"document_title" : i.document_title
+		}
+		eventsJson[i.id] = json
+
+	final = {
+		"total" : results.count(),
+		"data" : eventsJson
+	}
+	return jsonify(final)
+
+@app.route("/api/projects/getprojectsbyuser/<int:userid>")
+def apiProjectByUser(userid):
+	projects = database.projects
+	#projectsData = database.projects_users.query.join(projects).add_columns(projects_users.id, projects.id, projects.project_name, projects.start_date, projects.end_date, projects.description, projects.isPublic).filter_by(user_id=userid)
+	projectJson = {}
+	for i in projects:
+		json = {
+			"id" : i.id,
+			"project_name" : i.project_name,
+			"start_date" : i.start_date,
+			"end_date" : i.end_date,
+			"description" : i.description,
+			"is_public" : i.isPublic
+		}
+		projectJson[i.id] = json
+	return jsonify(projectJson) 
 
 @app.route("/api/comments/<int:documentid>")
-def apiEventComments(eventid):
-	comments = database.comments.filter_by(document_id=documentid)
-	return jsonify(comments)
+def apiEventComments(documentid):
+	comments = database.comments.query.filter_by(document_id=documentid)
+	commentsJson = {}
+	for i in comments:
+		logging.info('xx')
+		json = {
+			"id" : i.id,
+			"user_id" : i.user_id,
+			"document_id" : i.document_id,
+			"comment" : i.comment,
+			"created" : i.created
+		}
+		commentsJson[i.id] = json
+	return jsonify(commentsJson)
 
 @app.route("/api/documents/getdocumentsbyuser/<int:userid>")
 def apiGetDocumentsByUser(userid):
