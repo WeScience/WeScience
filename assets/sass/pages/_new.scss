@@ -1,0 +1,64 @@
+.new-project{
+  .row{
+    padding: 10px 0 10px 0;
+  }
+  .row-1 .col, #form-title .col, .row-3 .col{
+      padding: 10px 0 10px 24px;
+  }
+   #form-title .col-md-6{
+     padding: 10px 6px 10px 24px !important;
+   }
+  .row-1, .row-2, .row-3{
+    border-bottom: solid 1px #eee;
+  }
+
+  .row .form-row label{
+    font-size: 18px;
+    padding: 5px 0 5px 0;
+  }
+
+  .row .form-row input{
+    width:99%;
+    height: auto;
+    padding: 5px;
+  }
+
+  .row .form-row textarea{
+    width:99%;
+    height: auto;
+    min-height: 200px;
+    padding: 5px;
+  }
+
+  .row-3 .col input{
+    width: auto;
+    height: 30px;
+  }
+
+  .row-3 .col i{
+    font-size: 38px;
+    padding: 0 5px 0 5px;
+  }
+
+  .row-3 .col .form-row div{
+    display: inline-block;
+    height: 67px;
+  }
+
+  .row-3 .col .form-row h3{
+    margin: 0 5px 5px 5px !important;
+  }
+
+  .row-4{
+    padding: 20px 0 20px 0;
+    text-align: left;
+  }
+
+  .row-4 .form-row{
+    padding-left: 24px;
+  }
+
+  .row-4 .form-row input{
+    width: 50%;
+  }
+}

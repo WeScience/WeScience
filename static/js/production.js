@@ -22,7 +22,34 @@ function api() {
     };
 }
 
-},{"jquery":12}],2:[function(require,module,exports){
+},{"jquery":17}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _api = require('./api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    search: function search(documentId, userId, offset, limit, filter, callback) {
+
+        var queryString = '';
+        if (userId) queryString += 'user_id=' + userId;
+        if (documentId) queryString += '&document_id=' + documentId;
+        queryString += '&offset=' + offset + '&limit=' + limit + '&filter=' + filter;
+
+        var url = '/api/comments' + '?' + queryString;
+
+        (0, _api2.default)().get(url, callback);
+    }
+};
+
+},{"./api":1}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -50,36 +77,12 @@ function events() {
     };
 }
 
-},{"./api":1}],3:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = projects;
-
-var _api = require('./api');
-
-var _api2 = _interopRequireDefault(_api);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function projects() {
-
-    return {
-        search: function search(user_id, callback) {
-            (0, _api2.default)().get('/api/comments/' + 1, callback);
-        }
-    };
-}
-
 },{"./api":1}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = users;
 
 var _api = require('./api');
 
@@ -87,16 +90,39 @@ var _api2 = _interopRequireDefault(_api);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function users() {
+exports.default = {
+    search: function search(isPublic, userId, offset, limit, filter, callback) {
 
-    return {
-        find: function find(user_id, callback) {
-            (0, _api2.default)().get('/api/user/' + user_id, callback);
-        }
-    };
-}
+        var queryString = 'user_id=' + userId + '&offset=' + offset + '&limit=' + limit + '&filter=' + filter;
+
+        if (isPublic !== null) queryString += '&is_public=' + isPublic;
+
+        var url = '/api/projects?' + queryString;
+
+        (0, _api2.default)().get(url, callback);
+    }
+};
 
 },{"./api":1}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _api = require('./api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    find: function find(user_id, callback) {
+        (0, _api2.default)().get('/api/user/' + user_id, callback);
+    }
+};
+
+},{"./api":1}],6:[function(require,module,exports){
 'use strict';
 
 // Importing jQuery in ES6 style
@@ -139,7 +165,160 @@ if ((0, _jquery2.default)('.home-page').length) (0, _home2.default)().init();
 if ((0, _jquery2.default)('.profile-page').length) (0, _profile2.default)().init();
 if ((0, _jquery2.default)('.js-project-commits-page').length) (0, _commits2.default)().init();
 
-},{"./pages/commits.js":6,"./pages/dashboard.js":7,"./pages/home.js":8,"./pages/mainNav.js":9,"./pages/profile.js":10,"bootstrap-sass":11,"jquery":12}],6:[function(require,module,exports){
+},{"./pages/commits.js":11,"./pages/dashboard.js":12,"./pages/home.js":13,"./pages/mainNav.js":14,"./pages/profile.js":15,"bootstrap-sass":16,"jquery":17}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = commitList;
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var template = '\
+<li> \
+    <img src="[[avatar]]" class="img-rounded" width="40" height="40"> \
+    <strong>[[created]]</strong> \
+    <a href="#">[[name]]</a> \
+    updated \
+    <a href="/projects/[[project_id]]/[[document_id]]">[[document_title]]</a> \
+</li>\
+';
+
+function commitList() {
+    return {
+        getHtml: function getHtml(results) {
+            var html = '';
+            _jquery2.default.each(results, function (index, event) {
+                var currentTemplate = template;
+                _jquery2.default.each(event, function (field, value) {
+                    currentTemplate = currentTemplate.replace('[[' + field + ']]', value);
+                });
+                html += currentTemplate;
+            });
+            return html;
+        }
+    };
+}
+
+},{"jquery":17}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var template = '<li> \
+    <span><a href="/profile/[[user_id]]">[[name]]</a> commented on your document</span> \
+    <time>[[created]]</time> \
+    <a href="/project/[[project_id]]/[[document_id]]" class="view">view</a> \
+    </li>';
+
+exports.default = {
+    getHtml: function getHtml(results) {
+        var html = '';
+        $.each(results, function (index, notification) {
+            var currentTemplate = template;
+            $.each(notification, function (field, value) {
+                currentTemplate = currentTemplate.replace('[[' + field + ']]', value);
+            });
+            html += currentTemplate;
+        });
+        return html;
+    }
+};
+
+},{}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+
+    $paginationContainers: (0, _jquery2.default)('.js-pagination'),
+
+    generate: function generate(total, offset, limit, callback) {
+        var numberOfPages = parseInt(total / limit);
+        if (total % limit > 0) numberOfPages++;
+        var currentPage = offset == 0 ? 1 : parseInt(offset / limit);
+        if (offset % limit == 0 && offset > 0) currentPage++;
+
+        var plusPage = currentPage + 1;
+        if (plusPage > numberOfPages) plusPage = numberOfPages;
+        var minusPage = currentPage - 1;
+        if (minusPage < 1) minusPage = 1;
+
+        var html = '<li><a href="#" data-page="' + minusPage + '"><i class="fa fa-angle-left"></i></a>';
+        for (var i = 1; i <= numberOfPages; i++) {
+            html += '<li';
+            html += currentPage == i ? ' class="active"' : '';
+            html += '><a href="#" data-page="' + i + '">' + i + '</a></li>';
+        }
+        html += '<li><a href="#" data-page="' + plusPage + '"><i class="fa fa-angle-right"></i></a>';
+
+        this.$paginationContainers.html(html);
+        this.setupClicks(limit, callback);
+    },
+
+    setupClicks: function setupClicks(limit, callback) {
+        var _this = this;
+        _this.$paginationContainers.find('li > a').off('click').on('click', function (e) {
+            e.preventDefault();
+            _this.$paginationContainers.find('li').removeClass('active');
+            (0, _jquery2.default)(this).parents('li').addClass('active');
+            var pageNumber = (0, _jquery2.default)(this).data('page');
+            if (pageNumber) callback((pageNumber - 1) * limit);
+        });
+    }
+};
+
+},{"jquery":17}],10:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var template = '<a class="project-stub" href="/project/[[project_id]]">\
+    <h3>[[project_name]]</h3>\
+    <i class="fa fa-anchor"></i>\
+    <p>[[description]]</p>\
+    <p>Created: [[created]]</p>\
+    <p>Last Update: [[last_updated]]</p>\
+    </a>';
+
+exports.default = {
+    getHtml: function getHtml(results) {
+        var html = '';
+        _jquery2.default.each(results, function (index, notification) {
+            var currentTemplate = template;
+            _jquery2.default.each(notification, function (field, value) {
+                currentTemplate = currentTemplate.replace('[[' + field + ']]', value);
+            });
+            html += currentTemplate;
+        });
+        return html;
+    }
+};
+
+},{"jquery":17}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -151,6 +330,14 @@ var _events = require('../api/events');
 
 var _events2 = _interopRequireDefault(_events);
 
+var _commitList = require('../components/commitList');
+
+var _commitList2 = _interopRequireDefault(_commitList);
+
+var _pagination = require('../components/pagination');
+
+var _pagination2 = _interopRequireDefault(_pagination);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function commits() {
@@ -158,19 +345,35 @@ function commits() {
 
         totalCommits: null,
 
+        perPage: 20,
+
+        currentOffset: 0,
+
         init: function init() {
+            this.load();
+        },
+
+        load: function load() {
             var _this = this;
-            (0, _events2.default)().search(1, 1, 0, 10, '', function (response) {
+            (0, _events2.default)().search(1, 1, _this.currentOffset, _this.perPage, '', function (response) {
                 _this.totalCommits = response.total;
-                $.each(response.data, function (index, val) {
-                    console.log(val);
-                });
+                var html = (0, _commitList2.default)().getHtml(response.data);
+                $('.commit-list').html(html);
+                _this.paginate();
+            });
+        },
+
+        paginate: function paginate() {
+            var _this = this;
+            _pagination2.default.generate(_this.totalCommits, _this.currentOffset, _this.perPage, function (offset) {
+                _this.currentOffset = offset;
+                _this.load();
             });
         }
     };
 };
 
-},{"../api/events":2}],7:[function(require,module,exports){
+},{"../api/events":3,"../components/commitList":7,"../components/pagination":9}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -178,23 +381,49 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = dashboard;
 
+var _comments = require('../api/comments');
+
+var _comments2 = _interopRequireDefault(_comments);
+
 var _projects = require('../api/projects');
 
 var _projects2 = _interopRequireDefault(_projects);
+
+var _notificationList = require('../components/notificationList');
+
+var _notificationList2 = _interopRequireDefault(_notificationList);
+
+var _projectList = require('../components/projectList');
+
+var _projectList2 = _interopRequireDefault(_projectList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function dashboard() {
     return {
         init: function init() {
-            (0, _projects2.default)().search(null, function (response) {
-                console.log(response);
+            this.loadProjects();
+            this.loadComments();
+        },
+
+        loadComments: function loadComments() {
+            _comments2.default.search(null, 1, 0, 10, '', function (response) {
+                var html = _notificationList2.default.getHtml(response.data);
+                $('.notifications').html(html);
+            });
+        },
+
+        loadProjects: function loadProjects() {
+            _projects2.default.search(null, 1, 0, 12, '', function (response) {
+                var html = _projectList2.default.getHtml(response.data);
+                $('.project-list').html(html);
             });
         }
+
     };
 };
 
-},{"../api/projects":3}],8:[function(require,module,exports){
+},{"../api/comments":2,"../api/projects":4,"../components/notificationList":8,"../components/projectList":10}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -207,7 +436,7 @@ function home() {
     };
 }
 
-},{}],9:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -224,7 +453,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function mainNav() {
     return {
         init: function init() {
-            console.log("NavFix");
             if (window.innerWidth < 768) {
                 $("#navToggle").appendTo(".row");
             }
@@ -232,7 +460,7 @@ function mainNav() {
     };
 };
 
-},{"../api/api":1}],10:[function(require,module,exports){
+},{"../api/api":1}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -244,23 +472,49 @@ var _users = require('../api/users');
 
 var _users2 = _interopRequireDefault(_users);
 
+var _projects = require('../api/projects');
+
+var _projects2 = _interopRequireDefault(_projects);
+
+var _projectList = require('../components/projectList');
+
+var _projectList2 = _interopRequireDefault(_projectList);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function profile() {
     return {
         init: function init() {
-            (0, _users2.default)().find(1, function (response) {
+            this.loadProfile();
+            this.loadProjects();
+        },
+
+        loadProfile: function loadProfile() {
+            _users2.default.find(1, function (response) {
                 $.each(response, function (fieldName, value) {
                     $('.js-' + fieldName).html(value);
                 });
 
                 $('.js-avatar-image').attr('src', response.avatar);
             });
+        },
+
+        loadProjects: function loadProjects() {
+            _projects2.default.search(0, 1, 0, 12, '', function (response) {
+                var html = _projectList2.default.getHtml(response.data);
+                if (!html) html = '<p>No Projects Found</p>';
+                $('.project-list-private').html(html);
+            });
+            _projects2.default.search(1, 1, 0, 12, '', function (response) {
+                var html = _projectList2.default.getHtml(response.data);
+                if (!html) html = '<p>No Projects Found</p>';
+                $('.project-list-public').html(html);
+            });
         }
     };
 };
 
-},{"../api/users":4}],11:[function(require,module,exports){
+},{"../api/projects":4,"../api/users":5,"../components/projectList":10}],16:[function(require,module,exports){
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -2639,7 +2893,7 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-},{}],12:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.0
  * https://jquery.com/
@@ -12885,4 +13139,4 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[5]);
+},{}]},{},[6]);

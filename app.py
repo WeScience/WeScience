@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, redirect, url_for, request
 from sqlalchemy import text
 from flask_sqlalchemy import SQLAlchemy
 import database
@@ -254,3 +254,26 @@ def apiDocuments():
 		"data" : documentsJson
 	}
 	return jsonify(final)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            return redirect(url_for('dashboard'))
+        return render_template('index.html', error=error)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    error = None
+    if request.method == 'POST':
+        if (request.form['newusername'] == None) or (request.form['email'] == None) or (request.form['password_one'] == None) or (request.form['password_two'] == None) or (request.form['password_one'] != request.form['password_two']):
+            error = None
+        else:
+            return redirect(url_for('dashboard'))
+        return render_template('index.html')
+
+if __name__ == "__main__":
+	app.run()

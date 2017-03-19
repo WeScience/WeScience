@@ -5,28 +5,29 @@
     <div class="modal fade" id="loginModal" role="dialog">
          <div class="modal-dialog">
             <div class="modal-content backLight">
-                <div class="modal-header">
+                <div class="modal-header textLight backHL">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h1 class="modal-title">Login</h1>
                 </div>
-                <div class="modal-body backDark">
-                    <form id='contact-form' class="form-horizontal " role="form" method="post">
+                <div class="modal-body textHL backLight">
+                    <form id='contact-form' class="form-horizontal " role="form" action="/login" method="post">
                         <div class="form-group">
-                            <label for="name" class=" control-label textLight">Name:</label>
-                            <input type="text" class="form-control backLight" id="name" name="name" placeholder="First & Last Name" value="">
+                            <label for="username" class=" control-label textLight">Username:</label>
+                            <input type="text" class="form-control backLight" id="username" name="username" placeholder="Username" value="{{
+                            request.form.username }}">
                         </div>
                         <div class="form-group">
                             <label for="pwd" class="control-label textLight">Password:</label>
-                           <input type="password" class="form-control" id="pwd" placeholder="Password" value="">
-                        </div>
-                        <div class="form-group">
-                            <label for="message" class="control-label textLight">Message</label>
-                            <textarea id='formMessage' class="form-control backLight" rows="4" name="message"></textarea>
+                            <input type="password" class="form-control" id="pwd" name="password" placeholder="Password" value="{{
+                            request.form.password }}">
                         </div>
                         <div class="form-group lastGroup">
-                            <input id="submit" name="submit" type="submit" value="Send" class="btn btn-lg btn-contact backHL pull-right textDark" onclick="" data-dismiss="modal"></input> 
+                            <input id="login" name="login" type="submit" value="Login" class="btn btn-lg btn-contact backHL pull-right textDark" onclick=""></input> 
                         </div>
                     </form>
+                    {% if error %}
+                        <p class="error"><strong>Error:</strong> {{ error }}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -37,36 +38,63 @@
     <div class="modal fade" id="signUpModal" role="dialog">
          <div class="modal-dialog">
             <div class="modal-content backLight">
-                <div class="modal-header">
+                <div class="modal-header textWhite backHL">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h1 class="modal-title">Sign Up</h1>
                 </div>
-                <div class="modal-body backDark">
-                    <form id='contact-form' class="form-horizontal " role="form" method="post">
+                <div class="modal-body textHL backLight">
+                    <form id='contact-form' class="form-horizontal " role="form" action="/signup" method="post">
                         <div class="form-group">
-                            <label for="name" class=" control-label textLight">Name:</label>
-                            <input type="text" class="form-control backLight" id="name" name="name" placeholder="First & Last Name" value="">
+                            <label for="name" class=" control-label textLight">Username:</label>
+                            <input type="text" class="form-control backLight" id="name" name="newusername" placeholder="Username" value="{{
+                            request.form.newusername }}">
                         </div>
                         <div class="form-group">
                             <label for="email" class="control-label textLight">Email:</label>
-                            <input type="text" class="form-control backLight" id="email" name="name" placeholder="First & Last Name" value="">
+                            <input type="text" class="form-control backLight" id="email" name="email" placeholder="example@example.com" value="{{
+                            request.form.email }}">
                         </div>
                         <div class="form-group">
                             <label for="pwd" class="control-label textLight">Password:</label>
-                            <input type="password" class="form-control" id="pwd" placeholder="Password" value="">
+                            <input type="password" class="form-control" id="pwd" placeholder="Password" value="{{
+                            request.form.password_one}}">
                         </div>
                         <div class="form-group">
                             <label for="pwd" class="control-label textLight">Confirm Password:</label>
-                           <input type="password" class="form-control" id="pwd" placeholder="Password" value="">
+                            <input type="password" class="form-control" id="pwd" placeholder="Password" value="{{
+                            request.form.password_two}}">
                         </div>
                         <div class="form-group lastGroup">
-                            <input id="submit" name="submit" type="submit" value="Send" class="btn btn-lg btn-contact backHL pull-right textDark" data-dismiss="modal" onclick=""></input> 
+                            <input id="signUp" name="signUp" type="submit" value="Send" class="btn btn-lg btn-contact backHL pull-right textDark" onclick=""></input> 
                         </div>
                     </form>
+                    {% if error %}
+                        <p class="error"><strong>Error:</strong> {{ error }}
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div id="beakerAnimation">
+    <div id="container">
+      <div id="beaker">
+        <div id="liquid">
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+        </div>
+      </div>
+    </div>
+<div>
+
+<div class="jumbotron backWhite fade-in">
+ <h1 class="textDark text-center"  id="title"><strong>WeScience</strong></h1>
 </div>
 
 {% endblock %}

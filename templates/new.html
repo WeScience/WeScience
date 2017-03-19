@@ -1,35 +1,101 @@
 {% extends "common/layout.html" %}
 {% block body %}
-<section class="row row-1">
-  <h1>Create a new research project</h1>
-  <p>A project contains all the files, events, data and discussions for your project.</p>
-</section>
-<section class="row row-2">
-  <form id="form-title">
-    <div class="row">
-      <label for="name">Project name</label>
-      <input type="text" id="project-name" name="project_name">
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        <label for="name">Start date</label>
-        <input type="text" id="strt-date" name="start_date">
-      </div>
-      <div class="col-md-2">
-        <label for="name">End date</label>
-        <input type="text" id="end-date" name="end_date">
-      </div>
-    </div>
-    <div class="row">
-      <label for="summary">Project summary</label>
-      <input type="text" id="project-summary" name="project_summary">
-    </div>
-    <div class="row">
-      <label for="description">Project description</label>
-      <textarea id="project-description" name="project_description"></textarea>
-    </div>
-</section>
-<section class="row row-3">
+<section class="container new-project">
+  <section class="row row-1">
+    <section class="col">
+      <h1>Create a new research project</h1>
+      <p>A project contains all the files, events, data and discussions for your project.</p>
+    </section>
+  </section>
 
+  <section class="row row-2">
+    <form id="form-title" class="container">
+
+      <div class="row">
+        <div class="col">
+          <div class="form-row">
+            <label for="name">Project name</label>
+          </div>
+          <div class="form-row">
+            <input type="text" id="project-name" name="project_name">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-row">
+            <label for="name">Start date</label>
+          </div>
+          <div class="form-row">
+            <input type="text" id="strt-date" name="start_date">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-row">
+            <label for="name">End date</label>
+          </div>
+          <div class="form-row">
+            <input type="text" id="end-date" name="end_date">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-row">
+          <label for="summary">Project summary</label>
+          </div>
+          <div class="form-row">
+            <input type="text" id="project-summary" name="project_summary">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-row">
+            <label for="description">Project description</label>
+          </div>
+          <div class="form-row">
+            <textarea id="project-description" name="project_description"></textarea>
+          </div>
+        </div>
+      </div>
+  </section>
+  <section class="row row-3">
+    <div class="col">
+      <div class="form-row">
+        <div class"inpt">
+          <input type="radio" name="status" value="public" checked> <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </div>
+        <div class="desc">
+          <h3>Public</h3>
+          <p>Anyone can see this project. You choose who can contribute.</p>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class"inpt">
+        <input type="radio" name="status" value="private"> <i class="fa fa-lock" aria-hidden="true"></i>
+      </div>
+      <div class="desc">
+        <h3>Private</h3>
+        <p>You choose who can see and contribute to this project. </p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row row-4">
+    <div class="col">
+      <div class="form-row">
+       <input type="submit" value="Create Project">
+     </div>
+    </div>
+  </section>
 </section>
+
+
 {% endblock %}
