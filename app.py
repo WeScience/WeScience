@@ -93,6 +93,23 @@ def apiProjectEvent(projectid):
 	}
 	return jsonify(final)
 
+@app.route("/api/projects/getprojectsbyuser/<int:userid>")
+def apiProjectByUser(userid):
+	projects = database.projects
+	#projectsData = database.projects_users.query.join(projects).add_columns(projects_users.id, projects.id, projects.project_name, projects.start_date, projects.end_date, projects.description, projects.isPublic).filter_by(user_id=userid)
+	projectJson = {}
+	for i in projects:
+		json = {
+			"id" : i.id,
+			"project_name" : i.project_name,
+			"start_date" : i.start_date,
+			"end_date" : i.end_date,
+			"description" : i.description,
+			"is_public" : i.isPublic
+		}
+		projectJson[i.id] = json
+	return jsonify(projectJson) 
+
 @app.route("/api/comments/<int:documentid>")
 def apiEventComments(documentid):
 	comments = database.comments.query.filter_by(document_id=documentid)
