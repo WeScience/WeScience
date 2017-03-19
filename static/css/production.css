@@ -8539,45 +8539,45 @@ nav.project-nav {
     bottom: 160px; } }
 
 .bubble:nth-child(1) {
-  left: 176px;
-  -webkit-animation-delay: 6.4349222529ms;
+  left: 174px;
+  -webkit-animation-delay: 4.1237561591ms;
+  -webkit-animation-duration: 1100ms;
+  -webkit-transform: scale(1.3); }
+
+.bubble:nth-child(2) {
+  left: 76px;
+  -webkit-animation-delay: 10.9495471832ms;
+  -webkit-animation-duration: 1000ms;
+  -webkit-transform: scale(0.9); }
+
+.bubble:nth-child(3) {
+  left: 119px;
+  -webkit-animation-delay: 22.377517416ms;
+  -webkit-animation-duration: 1100ms;
+  -webkit-transform: scale(1.3); }
+
+.bubble:nth-child(4) {
+  left: 121px;
+  -webkit-animation-delay: 8.757355268ms;
+  -webkit-animation-duration: 500ms;
+  -webkit-transform: scale(1); }
+
+.bubble:nth-child(5) {
+  left: 109px;
+  -webkit-animation-delay: 28.5061431221ms;
+  -webkit-animation-duration: 400ms;
+  -webkit-transform: scale(0.6); }
+
+.bubble:nth-child(6) {
+  left: 78px;
+  -webkit-animation-delay: 10.6205686955ms;
   -webkit-animation-duration: 1300ms;
   -webkit-transform: scale(0.7); }
 
-.bubble:nth-child(2) {
-  left: 100px;
-  -webkit-animation-delay: 1.9468934156ms;
-  -webkit-animation-duration: 600ms;
-  -webkit-transform: scale(1.3); }
-
-.bubble:nth-child(3) {
-  left: 52px;
-  -webkit-animation-delay: 24.2691737692ms;
-  -webkit-animation-duration: 800ms;
-  -webkit-transform: scale(0.4); }
-
-.bubble:nth-child(4) {
-  left: 10px;
-  -webkit-animation-delay: 3.6918537411ms;
-  -webkit-animation-duration: 800ms;
-  -webkit-transform: scale(0.4); }
-
-.bubble:nth-child(5) {
-  left: 145px;
-  -webkit-animation-delay: 15.0945573878ms;
-  -webkit-animation-duration: 1300ms;
-  -webkit-transform: scale(0.8); }
-
-.bubble:nth-child(6) {
-  left: 167px;
-  -webkit-animation-delay: 6.188351456ms;
-  -webkit-animation-duration: 600ms;
-  -webkit-transform: scale(0.6); }
-
 .bubble:nth-child(7) {
-  left: 50px;
-  -webkit-animation-delay: 2.7990785852ms;
-  -webkit-animation-duration: 700ms;
+  left: 63px;
+  -webkit-animation-delay: 24.3015635256ms;
+  -webkit-animation-duration: 600ms;
   -webkit-transform: scale(1.3); }
 
 @-webkit-keyframes fadeIn {

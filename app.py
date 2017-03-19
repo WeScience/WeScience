@@ -117,8 +117,10 @@ def apiProjects():
 
 @app.route("/api/document/<int:documentid>")
 def apidocument(documentid):
-	sql_text = """SELECT e.id, e.filename, e.created 
-	FROM events AS e WHERE document_id = :document_id
+	sql_text = """SELECT e.id, e.filename, e.created, d.document_title
+	FROM events AS e
+	LEFT JOIN documents AS d ON e.document_id = d.id
+	WHERE e.document_id = :document_id
 	ORDER BY created DESC
 	"""
 	results = db.engine.execute(sql_text, { "document_id": documentid })
@@ -135,6 +137,7 @@ def apidocument(documentid):
 		json = {
 			"id" : i.id,
 			"filename" : i.filename,
+			"document_title" : i.document_title,
 			"created" : datetime.datetime.fromtimestamp(int(i.created)).strftime('%d/%m/%Y %-I:%M%p'),
 			"revision" : total
 		}
@@ -205,6 +208,9 @@ def apiEventComments():
 
 	if 'project_id' in request.args:
 		sql_text += " AND e.project_id = :project_id"
+
+	if 'document_id' in request.args:
+		sql_text += " AND d.id = :document_id"
 
 	if 'user_id' in request.args:
 		sql_text += " AND e.user_id = :user_id"

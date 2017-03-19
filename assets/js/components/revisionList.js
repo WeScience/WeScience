@@ -3,8 +3,8 @@
 import $ from 'jquery';
 
 const template = '<li>\
-    <i class="fa fa-download"></i> &nbsp; <a href="[[filename]]">[[filename]] (version [[revision]])</a><br>\
-<small>12th March 2017</small>\
+    <i class="fa fa-download"></i> &nbsp; <a href="[[filename]]">[[document_title]] (version [[revision]])</a><br>\
+<small>[[created]]</small>\
 </li>';
 
 export default {
