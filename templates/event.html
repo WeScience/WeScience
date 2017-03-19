@@ -1,31 +1,19 @@
 {% extends "common/layout.html" %}
 {% block body %}
 
-<div class="container">
-    <h1>This is the name of the document</h1>
+<div class="container js-event-page">
+    <h1 class="js-document-title"><i class="fa fa-spinner fa-spin"></i></h1>
     <div class="row">
         <div class="col-sm-6">
 
             <h3>Download File</h3>
             <div class="download">
-                <i class="fa fa-download"></i> &nbsp; <a href="#">my-research-proposal.docx (version 4)</a><br>
-                <small>last update 14th March 2017</small>
+                <i class="fa fa-spinner fa-spin"></i>
             </div>
 
             <h3>Previous Revisions</h3>
             <ul class="revisions">
-               <li>
-                   <i class="fa fa-download"></i> &nbsp; <a href="#">my-research-proposal.docx (version 3)</a><br>
-                   <small>12th March 2017</small>
-               </li>
-                <li>
-                    <i class="fa fa-download"></i> &nbsp; <a href="#">my-research-proposal.docx (version 2)</a><br>
-                    <small>10th March 2017</small>
-                </li>
-                <li>
-                    <i class="fa fa-download"></i> &nbsp; <a href="#">my-research-proposal.docx (version 1)</a><br>
-                    <small>2nd March 2017</small>
-                </li>
+                <i class="fa fa-spinner fa-spin"></i>
             </ul>
         </div>
 
@@ -40,53 +28,8 @@
                     <button type="submit" class="btn btn-primary">Add Comment</button>
                 </div>
             </form>
-            <div class="conversation-item">
-                <div class="conversation-user">
-                    <img src="#" width="60" alt="">
-                </div>
-                <div class="conversation-body">
-                    <div class="name">
-                        Alistair Shaw
-                    </div>
-                    <div class="time hidden-xs">
-                        18th March 2017
-                    </div>
-                    <div class="text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </div>
-                </div>
-            </div>
-            <div class="conversation-item">
-                <div class="conversation-user">
-                    <img src="#" width="60" alt="">
-                </div>
-                <div class="conversation-body">
-                    <div class="name">
-                        Alistair Shaw
-                    </div>
-                    <div class="time hidden-xs">
-                        18th March 2017
-                    </div>
-                    <div class="text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </div>
-                </div>
-            </div>
-            <div class="conversation-item">
-                <div class="conversation-user">
-                    <img src="#" width="60" alt="">
-                </div>
-                <div class="conversation-body">
-                    <div class="name">
-                        Alistair Shaw
-                    </div>
-                    <div class="time hidden-xs">
-                        18th March 2017
-                    </div>
-                    <div class="text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </div>
-                </div>
+            <div class="conversation-log">
+                <i class="fa fa-spinner fa-spin"></i>
             </div>
         </div>
     </div>

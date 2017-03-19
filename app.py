@@ -115,6 +115,44 @@ def apiProjects():
 	}
 	return jsonify(final)
 
+@app.route("/api/document/<int:documentid>")
+def apidocument(documentid):
+	sql_text = """SELECT e.id, e.filename, e.created, d.document_title
+	FROM events AS e
+	LEFT JOIN documents AS d ON e.document_id = d.id
+	WHERE e.document_id = :document_id
+	ORDER BY created DESC
+	"""
+	results = db.engine.execute(sql_text, { "document_id": documentid })
+
+	sql = text("select count() AS count from events WHERE document_id = :document_id")
+	count_results = db.engine.execute(sql, { "document_id": documentid })
+	
+	for i in count_results:
+		total = i.count
+
+	eventsJson = {}
+	count = 0
+	for i in results:
+		json = {
+			"id" : i.id,
+			"filename" : i.filename,
+			"document_title" : i.document_title,
+			"created" : datetime.datetime.fromtimestamp(int(i.created)).strftime('%d/%m/%Y %-I:%M%p'),
+			"revision" : total
+		}
+		total = total - 1
+		eventsJson[count] = json
+		count = count + 1
+
+	document = database.documents.query.filter_by(id=documentid).first()
+	documentJson = {
+		"id" : document.id,
+		"document_title" : document.document_title,
+		"events" : eventsJson
+	}
+	return jsonify(documentJson)
+
 @app.route("/api/project/events/<int:projectid>")
 def apiProjectEvent(projectid):
 	sql_vars = {
@@ -171,6 +209,9 @@ def apiEventComments():
 	if 'project_id' in request.args:
 		sql_text += " AND e.project_id = :project_id"
 
+	if 'document_id' in request.args:
+		sql_text += " AND d.id = :document_id"
+
 	if 'user_id' in request.args:
 		sql_text += " AND e.user_id = :user_id"
 
@@ -207,7 +248,7 @@ def apiEventComments():
 @app.route("/api/documents")
 def apiDocuments():
 	sql_text = """
-	SELECT d.id, t.document_type, d.document_title
+	SELECT d.id, t.document_type, d.document_title, e.project_id
 	, (SELECT created FROM events AS e WHERE e.document_id = d.id ORDER BY created DESC LIMIT 1) AS last_updated
 	, (SELECT count(*) FROM events AS e WHERE e.document_id = d.id) AS revision
 	FROM documents AS d
@@ -238,7 +279,8 @@ def apiDocuments():
 			"document_type" : i.document_type,
 			"last_updated" : datetime.datetime.fromtimestamp(int(i.last_updated)).strftime('%d/%m/%Y %-I:%M%p'),
 			"document_title" : i.document_title,
-			"revision" : i.revision
+			"revision" : i.revision,
+			"project_id" : i.project_id
 		}
 		documentsJson[count] = json
 		count = count + 1

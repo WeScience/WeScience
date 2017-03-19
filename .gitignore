@@ -5,3 +5,4 @@ bower_components
 __pycache__
 .DS_Store
 *.pyc
+assets/css/*

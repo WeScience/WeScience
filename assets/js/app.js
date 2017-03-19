@@ -8,6 +8,7 @@ import profile from './pages/profile';
 import commits from './pages/commits';
 import mainNav from './pages/mainNav';
 import project from './pages/project';
+import event from './pages/event';
 // We need to expose jQuery as global variable
 window.jQuery = window.$ = $;
 
@@ -20,3 +21,4 @@ if ($('.home-page').length) home().init();
 if ($('.profile-page').length) profile().init();
 if ($('.js-project-commits-page').length) commits().init();
 if ($('.js-project-page').length) project.init();
+if ($('.js-event-page').length) event.init();
