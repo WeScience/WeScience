@@ -2,10 +2,24 @@
 {% block body %}
 
 <div class="container js-project-page">
-    <h1 class="js-project-title"><i class="fa fa-spinner fa-spin"></i></h1>
+    <div class="row project-head">
+      <div class="col-xs-8">
+        <h1 class="js-project-title"><i class="fa fa-spinner fa-spin"></i></h1>
+      </div>
+      <div class="col-xs-4">
+        <div class="row">
+          <div class="col-xs-6 btn-wrapper">
+            <a href="/new-event"><button class="btn btn-primary">Upload</button></a>
+          </div>
+          <div class="col-xs-6 btn-wrapper">
+            <button class="btn btn-primary fork">Fork</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h2>Project Documents</h2>
     <div class="project-documents">
-
         <a href="#" class="btn btn-primary">Add new Document</a>
     </div>
 
