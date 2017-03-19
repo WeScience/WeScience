@@ -2,6 +2,7 @@
     margin-top: 40px;
     .tab-pane {
         @extend .clearfix;
+        padding-top: 15px;
     }
 }
 
