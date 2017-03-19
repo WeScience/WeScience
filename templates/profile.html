@@ -27,10 +27,14 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="public">
-                {% include "components/project-list.html" %}
+                <div class="project-list-public">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="private">
-                {% include "components/project-list.html" %}
+                <div class="project-list-private">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
             </div>
         </div>
     </div>
