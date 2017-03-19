@@ -5,7 +5,7 @@
     <div class="modal fade" id="loginModal" role="dialog">
          <div class="modal-dialog">
             <div class="modal-content backLight">
-                <div class="modal-header textLight backHL">
+                <div class="modal-header textWhite backHL">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h1 class="modal-title">Login</h1>
                 </div>
@@ -37,7 +37,7 @@
 <div class="container">
     <div class="modal fade" id="signUpModal" role="dialog">
          <div class="modal-dialog">
-            <div class="modal-content backLight">
+            <div class="modal-content backWhite">
                 <div class="modal-header textWhite backHL">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h1 class="modal-title">Sign Up</h1>
@@ -56,12 +56,12 @@
                         </div>
                         <div class="form-group">
                             <label for="pwd" class="control-label textLight">Password:</label>
-                            <input type="password" class="form-control" id="pwd" placeholder="Password" value="{{
+                            <input type="password" class="form-control" id="pwd" name="password_one" placeholder="Password" value="{{
                             request.form.password_one}}">
                         </div>
                         <div class="form-group">
                             <label for="pwd" class="control-label textLight">Confirm Password:</label>
-                            <input type="password" class="form-control" id="pwd" placeholder="Password" value="{{
+                            <input type="password" class="form-control" id="pwd" name="password_two" placeholder="Password" value="{{
                             request.form.password_two}}">
                         </div>
                         <div class="form-group lastGroup">
@@ -77,24 +77,45 @@
     </div>
 </div>
 
-<div id="beakerAnimation">
-    <div id="container">
-      <div id="beaker">
-        <div id="liquid">
-          <div class="bubble"></div>
-          <div class="bubble"></div>
-          <div class="bubble"></div>
-          <div class="bubble"></div>
-          <div class="bubble"></div>
-          <div class="bubble"></div>
-          <div class="bubble"></div>
+<div class="container">
+    <div class="modal fade" id="video" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content backWhite">
+                <div class="modal-header textWhite backHL">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h1 class="modal-title">Weird Science</h1>
+                </div>
+                <div class="modal-body textHL backLight">
+                        <iframe width="480" height="345" src="https://www.youtube.com/embed/Jm-upHSP9KU" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-<div>
-
-<div class="jumbotron backWhite fade-in">
- <h1 class="textDark text-center"  id="title"><strong>WeScience</strong></h1>
 </div>
+    
+    <div class="bg" id="beakerAnimation">
+        <a data-toggle="modal" data-target="#video">
+            <div id="container">
+              <div id="beaker">
+                <div id="liquid">
+                  <div class="bubble"></div>
+                  <div class="bubble"></div>
+                  <div class="bubble"></div>
+                  <div class="bubble"></div>
+                  <div class="bubble"></div>
+                  <div class="bubble"></div>
+                  <div class="bubble"></div>
+                </div>
+              </div>
+            </div>
+        </a>
+    </div>
+
+    <div id="aboutus" class="panel panel-default backHL textWhite text-center">
+            <h1 > About Us</h1>
+            <p> eLife publishes outstanding research in the life sciences and biomedicine, from the most fundamental and theoretical work, through to translational, applied, and clinical research. Our 39 Senior editors and 314-member Board of Reviewing Editors are among the most respected and accomplished individuals in their fields – from human genetics and neuroscience to biophysics and epidemiology. Where necessary, our Senior editors will also consult with external guest editors to evaluate new submissions.</p>
+    </div>
+    
+
 
 {% endblock %}

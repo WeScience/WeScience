@@ -9,24 +9,42 @@
     line-height: 30px !important;
 }
 .small{
-     background: rgba( 45, 45, 42, 0.7);
+     background: rgba( 52, 128, 73, 0.7);
 }
 
 .modal-body{
 	padding: 5vw;
 }
 
+.bg{
+  background-image: url(../../static/img/home_background.jpg); 
+  width: 100vw;
+  height: auto;
+  padding-right: 0;
+  padding-left: 0;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-position: center center;
+}
+
 #beakerAnimation {
-	height: auto;
+	height: 65vh;
 	width: 100vw;
 }
+
 .jumbotron{
     padding: 40px 0 20px 0;
 }
 
+.panel{
+    margin: 0;
+}
+
 #container {
   height: 270px;
-  margin: 50px auto;
+  margin: 0px auto;
   overflow: hidden;
   position: relative;
   width: 248px;
@@ -115,25 +133,8 @@
   }
 }
 
-@-webkit-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
-@-moz-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
-@keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
-
-.fade-in {
-    opacity:0;  /* make things invisible upon start */
-    -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
-    -moz-animation:fadeIn ease-in 1;
-    animation:fadeIn ease-in 1;
-
-    -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
-    -moz-animation-fill-mode:forwards;
-    animation-fill-mode:forwards;
-
-    -webkit-animation-duration:1s;
-    -moz-animation-duration:1s;
-    animation-duration:1s;
-
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
-    animation-delay: 1s;
+#aboutus{
+  padding-left: 3vh;
+  padding-right: 3vh;
 }
+

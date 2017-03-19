@@ -339,15 +339,16 @@ def login():
 			return resp
 		return render_template('index.html', error=error)
 
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     error = None
     if request.method == 'POST':
         if (request.form['newusername'] == None) or (request.form['email'] == None) or (request.form['password_one'] == None) or (request.form['password_two'] == None) or (request.form['password_one'] != request.form['password_two']):
-            error = None
+            error = 'Invalid Credentials. Please try again.'
         else:
             return redirect(url_for('dashboard'))
-        return render_template('index.html')
+        return render_template('index.html', error=error)
 
 if __name__ == "__main__":
 	app.run()

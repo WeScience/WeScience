@@ -1,3 +1,7 @@
+html, body{
+  height: 100%;
+  margin: 0;
+}
 a, i {
     transition: all .5s ease;
 }
@@ -12,6 +16,10 @@ a, i {
 
 .textCream {
     color: $text-cream !important;
+}
+
+.textWhite {
+    color: #FFFFFF;
 }
 
 .textHL {
