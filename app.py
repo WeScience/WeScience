@@ -63,7 +63,7 @@ def new():
 		database.db.session.add(project)
 		database.db.session.commit()
 
-		return render_template('new.html')
+		return redirect(url_for('dashboard'))
 
 @app.route("/new-event/<int:projectid>/<int:userid>", methods=['GET', 'POST'])
 def newEvent(projectid, userid):

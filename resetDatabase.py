@@ -59,7 +59,7 @@ commentsList = [
 documentIds = ['1', '2', '3', '4', '5', '6', '7']
 
 count = 0
-while count <= 50:
+while count <= 5:
 	randDocID = random.choice(documentIds)
 	randComment = random.choice(commentsList)
 	comment = comments('1', randDocID, randComment, '1489854687')
