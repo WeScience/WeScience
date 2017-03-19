@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 import database
 import json
 import time
+import pprint
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -98,8 +99,14 @@ def apiProjectEvent(projectid):
 		}
 		eventsJson[i.id] = json
 
+	sql = text("select count() AS count from events WHERE project_id = :project_id")
+	results = db.engine.execute(sql, { "project_id": projectid })
+	
+	for i in results:
+		total = i.count
+
 	final = {
-		"total" : 7,
+		"total" : total,
 		"data" : eventsJson
 	}
 	return jsonify(final)
@@ -121,21 +128,51 @@ def apiProjectByUser(userid):
 		projectJson[i.id] = json
 	return jsonify(projectJson) 
 
-@app.route("/api/comments/<int:documentid>")
-def apiEventComments(documentid):
-	comments = database.comments.query.filter_by(document_id=documentid)
+@app.route("/api/comments")
+def apiEventComments():
+	sql_text = """
+	SELECT c.id, u.id as user_id, u.name, c.created, c.document_id, e.project_id, c.comment FROM comments AS c
+	LEFT JOIN users AS u ON c.user_id = u.id
+	LEFT JOIN documents AS d ON c.document_id = d.id
+	LEFT JOIN events AS e ON e.document_id = d.id
+	WHERE 1=1
+	"""
+
+	if 'project_id' in request.args:
+		sql_text += " AND e.project_id = :project_id"
+
+	if 'user_id' in request.args:
+		sql_text += " AND e.user_id = :user_id"
+
+	if 'offset' in request.args:
+		sql_text += " LIMIT :offset,:limit"
+
+	sql = text(sql_text)
+	results = db.engine.execute(sql, request.args)
+
 	commentsJson = {}
-	for i in comments:
-		logging.info('xx')
+	for i in results:
 		json = {
-			"id" : i.id,
+			"name" : i.name,
 			"user_id" : i.user_id,
 			"document_id" : i.document_id,
 			"comment" : i.comment,
-			"created" : i.created
+			"project_id": i.project_id,
+			"created" : time.strftime("%d/%m/%Y %-I:%M%p")
 		}
 		commentsJson[i.id] = json
-	return jsonify(commentsJson)
+
+	sql = text("select count() AS count from comments")
+	results = db.engine.execute(sql, request.args)
+	
+	for i in results:
+		total = i.count
+
+	final = {
+		"total" : total,
+		"data" : commentsJson
+	}
+	return jsonify(final)
 
 @app.route("/api/documents/getdocumentsbyuser/<int:userid>")
 def apiGetDocumentsByUser(userid):

@@ -1,12 +1,14 @@
 'use strict';
 
-import projects from '../api/projects';
+import comments from '../api/comments';
+import notificationList from '../components/notificationList';
 
 export default function dashboard() {
     return {
         init: function() {
-            projects().search(null, function(response) {
-                console.log(response);
+            comments.search(null, 1, 0, 10, '', function(response) {
+                const html = notificationList.getHtml(response.data);
+                $('.notifications').html(html);
             });
         }
     };
