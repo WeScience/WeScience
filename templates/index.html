@@ -1,29 +1,70 @@
 {% extends "common/layout.html" %}
 {% block body %}
 
-<div class="container backHL page-home">
-    <div class="row">
-        <div class="col-sm-6">
-            <h3 class="textLight">Login</h3>
-            <label class="textLight" for="usr">Name:</label>
-            <input type="text" class="form-control" id="usr">
-            <label class="textLight" for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
-            <br>
-            <button type="button" class="btn btn-success">Login</button>
+<div class="container">
+    <div class="modal fade" id="loginModal" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content backLight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h1 class="modal-title">Login</h1>
+                </div>
+                <div class="modal-body backDark">
+                    <form id='contact-form' class="form-horizontal " role="form" method="post">
+                        <div class="form-group">
+                            <label for="name" class=" control-label textLight">Name:</label>
+                            <input type="text" class="form-control backLight" id="name" name="name" placeholder="First & Last Name" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd" class="control-label textLight">Password:</label>
+                           <input type="password" class="form-control" id="pwd" placeholder="Password" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="control-label textLight">Message</label>
+                            <textarea id='formMessage' class="form-control backLight" rows="4" name="message"></textarea>
+                        </div>
+                        <div class="form-group lastGroup">
+                            <input id="submit" name="submit" type="submit" value="Send" class="btn btn-lg btn-contact backHL pull-right textDark" onclick="" data-dismiss="modal"></input> 
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-6">
-            <h3 class="textHL">Sign Up</h3>
-            <label class="textLight" for="usr">Name:</label>
-            <input type="text" class="form-control" id="usr">
-            <label class="textLight" for="usr">Email:</label>
-            <input type="text" class="form-control" id="usr">
-            <label class="textLight" for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
-            <label class="textLight" for="pwd">Confirm Password:</label>
-            <input type="password" class="form-control" id="pwd">
-            <br>
-            <button type="button" class="btn btn-info">Sign Up</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="modal fade" id="signUpModal" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content backLight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h1 class="modal-title">Sign Up</h1>
+                </div>
+                <div class="modal-body backDark">
+                    <form id='contact-form' class="form-horizontal " role="form" method="post">
+                        <div class="form-group">
+                            <label for="name" class=" control-label textLight">Name:</label>
+                            <input type="text" class="form-control backLight" id="name" name="name" placeholder="First & Last Name" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="control-label textLight">Email:</label>
+                            <input type="text" class="form-control backLight" id="email" name="name" placeholder="First & Last Name" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd" class="control-label textLight">Password:</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Password" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd" class="control-label textLight">Confirm Password:</label>
+                           <input type="password" class="form-control" id="pwd" placeholder="Password" value="">
+                        </div>
+                        <div class="form-group lastGroup">
+                            <input id="submit" name="submit" type="submit" value="Send" class="btn btn-lg btn-contact backHL pull-right textDark" data-dismiss="modal" onclick=""></input> 
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
