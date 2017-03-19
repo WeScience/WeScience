@@ -2,11 +2,12 @@
 
 // Importing jQuery in ES6 style
 import $ from "jquery";
-import dashboard from './pages/dashboard.js';
-import home from './pages/home.js';
-import profile from './pages/profile.js';
-import commits from './pages/commits.js';
-import mainNav from './pages/mainNav.js';
+import dashboard from './pages/dashboard';
+import home from './pages/home';
+import profile from './pages/profile';
+import commits from './pages/commits';
+import mainNav from './pages/mainNav';
+import project from './pages/project';
 // We need to expose jQuery as global variable
 window.jQuery = window.$ = $;
 
@@ -18,3 +19,4 @@ if ($('.dashboard-page').length) dashboard().init();
 if ($('.home-page').length) home().init();
 if ($('.profile-page').length) profile().init();
 if ($('.js-project-commits-page').length) commits().init();
+if ($('.js-project-page').length) project.init();
