@@ -26,7 +26,7 @@ roles_users = roles_users('1','1')
 db.session.add(roles_users)
 
 #add project
-project = projects('project 1', '1489854687', '1489854687', 'Desc', '0')
+project = projects('project 1', '1489854687', '1489854687', 'Summary', 'Desc', '0')
 db.session.add(project)
 
 #add project_user

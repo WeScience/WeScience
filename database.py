@@ -54,13 +54,15 @@ class projects(db.Model):
 	project_name = db.Column(db.String(120))
 	start_date = db.Column(db.String(120))
 	end_date = db.Column(db.String(120))
+	summary = db.Column(db.String(120))
 	description = db.Column(db.String(120))
 	isPublic = db.Column(db.Integer, default='0')
 
-	def __init__(self, project_name, start_date, end_date, description, isPublic):
+	def __init__(self, project_name, start_date, end_date, summary, description, isPublic):
 		self.project_name = project_name
 		self.start_date = start_date
 		self.end_date = end_date
+		self.summary = summary
 		self.description = description
 		self.isPublic = isPublic
 
@@ -68,7 +70,8 @@ class projects(db.Model):
 		return '<Project %r>' % self.project_name
 
 class projects_users(db.Model):
-	user_id = db.Column(db.Integer, primary_key=True)
+	id = db.Column(db.Integer, primary_key=True)
+	user_id = db.Column(db.Integer)
 	project_id = db.Column(db.Integer, ForeignKey('projects.id'))
 	permission_level = db.Column(db.Integer)
 
