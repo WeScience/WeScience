@@ -2,10 +2,11 @@
 {% block body %}
 <div class="container profile-page">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4 pic bio">
             <img src="http://placehold.it/350x350" class="js-avatar-image img-responsive">
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-4 bio">
+            <h3>eLife Hack24</h3>
             <ul class="personal-details">
                 <li><i class="fa fa-building"></i> <span class="js-institution"></span></li>
                 <li><i class="fa fa-user"></i> <span class="js-position"></span></li>
@@ -13,9 +14,20 @@
                 <li><i class="fa fa-twitter"></i> <span class="js-twitter"></span></li>
             </ul>
         </div>
+        <div class="col-sm-4 bio">
+          <section>
+            <h3>Bio</h3>
+            <p>
+              eLife is a 'not for profit' inspired by research funders and led
+              by scientists, to help accelerate discovery by operating a
+              platform for research communication
+            </p>
+          </section>
+        </div>
     </div>
 
-    <div class="profile-projects">
+    <div class="row">
+    <div class="profile-projects col-sm-6">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
@@ -38,5 +50,14 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 profile-publications">
+      <h2>Publications</h2>
+      <ul class="pub-list">
+        <li><h3>Paper 1</h3></li>
+        <li><h3>Paper 2</h3></li>
+        <li><h3>Paper 3</h3></li>
+      </ul>
+    </div>
+  </div>
 </div>
 {% endblock %}
