@@ -22,7 +22,7 @@ function api() {
     };
 }
 
-},{"jquery":9}],2:[function(require,module,exports){
+},{"jquery":10}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -89,6 +89,10 @@ var _profile = require('./pages/profile.js');
 
 var _profile2 = _interopRequireDefault(_profile);
 
+var _mainNav = require('./pages/mainNav.js');
+
+var _mainNav2 = _interopRequireDefault(_mainNav);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // We need to expose jQuery as global variable
@@ -97,12 +101,12 @@ window.jQuery = window.$ = _jquery2.default;
 // ES6 import does not work it throws error: Missing jQuery
 // using Node.js style import works without problems
 require('bootstrap-sass');
-
+(0, _mainNav2.default)().init();
 if ((0, _jquery2.default)('.dashboard-page').length) (0, _dashboard2.default)().init();
 if ((0, _jquery2.default)('.home-page').length) (0, _home2.default)().init();
 if ((0, _jquery2.default)('.profile-page').length) (0, _profile2.default)().init();
 
-},{"./pages/dashboard.js":5,"./pages/home.js":6,"./pages/profile.js":7,"bootstrap-sass":8,"jquery":9}],5:[function(require,module,exports){
+},{"./pages/dashboard.js":5,"./pages/home.js":6,"./pages/mainNav.js":7,"./pages/profile.js":8,"bootstrap-sass":9,"jquery":10}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -185,6 +189,31 @@ function home() {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.default = mainNav;
+
+var _api = require('../api/api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function mainNav() {
+    return {
+        init: function init() {
+            console.log("NavFix");
+            if (window.innerWidth < 768) {
+                $("#navToggle").appendTo(".row");
+            }
+        }
+    };
+};
+
+},{"../api/api":1}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.default = profile;
 
 var _users = require('../api/users');
@@ -204,7 +233,7 @@ function profile() {
     };
 };
 
-},{"../api/users":3}],8:[function(require,module,exports){
+},{"../api/users":3}],9:[function(require,module,exports){
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -2583,7 +2612,7 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.0
  * https://jquery.com/

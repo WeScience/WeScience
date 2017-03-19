@@ -8149,28 +8149,28 @@ a, i {
 .backWhite {
   background-color: #FFFFFF !important; }
 
-.navbar-custom {
-  border-radius: 0;
-  margin-bottom: 0px;
-  /* Have to set background manually for correct transparency*/
-  background: rgba(67, 140, 8, 0.9); }
-
+/**
 .navbar-custom .navbar-nav > li > a {
-  font-size: 16px !important;
-  padding-left: 3vw;
-  padding-right: 3vw; }
+    font-size: 16px !important;
+
+    padding-left: 3vw;
+    padding-right: 3vw;
+}
 
 .navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
-  background-color: transparent; }
+    background-color:transparent;
+}
 
-.nav > li > a:focus, .nav > li > a:hover {
-  background: rgba(67, 120, 8, 0.7) !important;
-  color: #EFEFEF; }
+.nav>li>a:focus, .nav>li>a:hover{
+    background: rgba( 67, 120, 8, 0.7) !important;
+    color:#EFEFEF;
+}
 
-.nav-link {
-  text-align: right;
-  opacity: 1 !important; }
-
+.nav-link{
+    text-align: right;
+    opacity: 1 !important;
+}
+**/
 .card, a.project-stub {
   text-decoration: none;
   color: #333;
@@ -8188,6 +8188,117 @@ ul.notifications {
     border-bottom: 1px solid #fff; }
     ul.notifications li span {
       display: block; }
+
+#page-header {
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background: rgba(67, 140, 8, 0.9); }
+  #page-header #logo {
+    color: #fff; }
+  #page-header #logo > a {
+    color: #fff !important; }
+    #page-header #logo > a i, #page-header #logo > a h1 {
+      display: inline-block; }
+  #page-header section {
+    display: block; }
+  #page-header .navbar-custom {
+    margin: 0;
+    padding: 0; }
+    #page-header .navbar-custom .nav {
+      width: 100%;
+      overflow: hidden;
+      display: block; }
+      #page-header .navbar-custom .nav li {
+        text-align: center; }
+      #page-header .navbar-custom .nav li a {
+        color: #fff !important; }
+      #page-header .navbar-custom .nav li:hover {
+        background: rgba(67, 120, 8, 0.7) !important;
+        color: #EFEFEF; }
+      #page-header .navbar-custom .nav li > a:hover {
+        background: none !important;
+        color: #EFEFEF; }
+  @media screen and (min-width: 1200px) {
+    #page-header section {
+      height: 55px; }
+    #page-header #logo {
+      padding: 0 24px; }
+      #page-header #logo i {
+        padding: 10px 5px 10px 0;
+        font-size: 32px; }
+      #page-header #logo h1 {
+        margin: 0;
+        padding: 10px 5px 10px 5px;
+        font-size: 30px; }
+    #page-header .navbar-custom .nav {
+      height: 55px; }
+      #page-header .navbar-custom .nav li {
+        width: 25%;
+        height: 40px;
+        margin: 15px 0 0 0;
+        padding: 5px; }
+      #page-header .navbar-custom .nav li a {
+        padding: 5px 5px 5px 5px;
+        font-size: 22px; } }
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    #page-header section {
+      height: 55px; }
+    #page-header #logo {
+      padding: 0 24px; }
+      #page-header #logo i {
+        padding: 10px 5px 10px 0;
+        font-size: 28px; }
+      #page-header #logo h1 {
+        margin: 0;
+        padding: 10px 5px 10px 5px;
+        font-size: 26px; }
+    #page-header .navbar-custom .nav {
+      height: 55px; }
+      #page-header .navbar-custom .nav li {
+        width: 25%;
+        height: 40px;
+        margin: 15px 0 0 0;
+        padding: 5px; }
+      #page-header .navbar-custom .nav li a {
+        padding: 5px 5px 5px 5px;
+        font-size: 14px; } }
+  @media screen and (max-width: 767px) {
+    #page-header section {
+      height: 55px; }
+    #page-header .container, #page-header .row {
+      height: auto; }
+    #page-header #logo {
+      padding: 0 24px; }
+      #page-header #logo i {
+        padding: 10px 5px 10px 0;
+        font-size: 28px; }
+      #page-header #logo h1 {
+        margin: 0;
+        padding: 10px 5px 10px 5px;
+        font-size: 26px; }
+    #page-header #navToggle .nav {
+      height: auto; }
+      #page-header #navToggle .nav li {
+        width: 100%;
+        height: 40px;
+        margin: 15px 0 0 0;
+        padding: 5px;
+        text-align: center; }
+      #page-header #navToggle .nav li a {
+        padding: 5px 5px 5px 5px;
+        font-size: 18px;
+        color: #fff !important; }
+    #page-header #navToggle li:hover {
+      background: rgba(67, 120, 8, 0.7) !important;
+      color: #EFEFEF; }
+    #page-header #navToggle li > a:hover {
+      background: none !important;
+      color: #EFEFEF; }
+    #page-header .navbar-custom .navbar-toggle i {
+      color: #fff;
+      font-size: 22px; } }
 
 nav.project-nav {
   background: #2D2D2A; }
