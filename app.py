@@ -344,7 +344,6 @@ def login():
 			error = 'Invalid Credentials. Please try again.'
 		else:
 			resp = make_response(redirect(url_for('dashboard')))
-			resp.set_cookie('loggedin',value='true')
 			return resp
 		return render_template('index.html', error=error)
 
