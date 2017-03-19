@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, redirect, url_for, request
+from flask import Flask, render_template, jsonify, redirect, url_for, request, make_response
 from sqlalchemy import text
 from flask_sqlalchemy import SQLAlchemy
 import database
@@ -36,9 +36,23 @@ def profile(userid):
 def dashboard():
     return render_template('dashboard.html')
 
-@app.route("/new")
+@app.route("/new", methods=['GET', 'POST'])
 def new():
-    return render_template('new.html')
+	if request.method == 'GET':
+		return render_template('new.html')
+	elif request.method == 'POST':
+		projectName = request.form['project_name']
+		startDate = request.form['start_date']
+		endDate = request.form['end_date']
+		summary = request.form['project_summary']
+		desc = request.form['project_description']
+		is_public = request.form['status']
+
+		project = database.projects(projectName, startDate, endDate, summary, desc, is_public)
+		database.db.session.add(project)
+		database.db.session.commit()
+
+		return render_template('new.html')
 
 # API Routes
 @app.route("/api/user/<int:userid>")
@@ -257,13 +271,15 @@ def apiDocuments():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
-    if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            return redirect(url_for('dashboard'))
-        return render_template('index.html', error=error)
+	error = None
+	if request.method == 'POST':
+		if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+			error = 'Invalid Credentials. Please try again.'
+		else:
+			resp = make_response(redirect(url_for('dashboard')))
+			resp.set_cookie('loggedin',value='true')
+			return resp
+		return render_template('index.html', error=error)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
