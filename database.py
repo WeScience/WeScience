@@ -24,14 +24,6 @@ class users(db.Model):
 		self.avatar = avatar
 		self.twitter = twitter
 
-	@property
-	def serialize(self):
-		"""Return object data in easily serializeable format"""
-		return {
-		   'id' : self.id,
-			'email': self.email,
-	}
-
 	def __repr__(self):
 		return '<User %r>' % self.email
 
@@ -117,12 +109,14 @@ class events(db.Model):
 	project_id = db.Column(db.Integer)
 	filename = db.Column(db.String(120))
 	created = db.Column(db.String(120))
+	user_id = db.Column(db.Integer)
 
-	def __init__(self, document_id, project_id, filename, created):
+	def __init__(self, document_id, project_id, filename, created, user_id):
 		self.document_id = document_id
 		self.project_id = project_id
 		self.filename = filename
 		self.created = created		
+		self.user_id = user_id
 
 	def __repr__(self):
 		return '<Event %r>' % self.id

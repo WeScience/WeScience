@@ -63,8 +63,18 @@ def apiProject(projectid):
 
 @app.route("/api/project/events/<int:projectid>")
 def apiProjectEvent(projectid):
-	events = database.events.query.filter_by(id=projectid)
-	return jsonify(events)
+	events = database.events.query.filter_by(project_id=projectid)
+	eventsJson = {}
+	for i in events:
+		json = {
+			"id" : i.id,
+			"document_id" : i.document_id,
+			"project_id" : i.project_id,
+			"filename" : i.filename,
+			"created" : i.created
+		}
+		eventsJson[i.id] = json
+	return jsonify(eventsJson)
 
 @app.route("/api/comments/<int:documentid>")
 def apiEventComments(eventid):
