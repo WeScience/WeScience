@@ -8217,6 +8217,9 @@ a, i {
 .textCream {
   color: #FFF8E8 !important; }
 
+.textWhite {
+  color: #FFFFFF; }
+
 .textHL {
   color: #ff588b !important; }
 
@@ -8453,14 +8456,21 @@ nav.project-nav {
   line-height: 30px !important; }
 
 .small {
-  background: rgba(45, 45, 42, 0.7); }
+  background: rgba(52, 128, 73, 0.7); }
 
 .modal-body {
   padding: 5vw; }
 
-#beakerAnimation {
-  height: 100vh;
-  width: 100 vw; }
+.bg {
+  background-image: url(../../static/img/home_background.jpg);
+  height: 65vh;
+  padding-right: 0;
+  padding-left: 0;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-position: center center; }
 
 #container {
   height: 270px;
@@ -8539,88 +8549,56 @@ nav.project-nav {
     bottom: 160px; } }
 
 .bubble:nth-child(1) {
-  left: 176px;
-  -webkit-animation-delay: 6.4349222529ms;
-  -webkit-animation-duration: 1300ms;
+  left: 117px;
+  -webkit-animation-delay: 5.1106009568ms;
+  -webkit-animation-duration: 1200ms;
   -webkit-transform: scale(0.7); }
 
 .bubble:nth-child(2) {
-  left: 100px;
-  -webkit-animation-delay: 1.9468934156ms;
-  -webkit-animation-duration: 600ms;
-  -webkit-transform: scale(1.3); }
+  left: 5px;
+  -webkit-animation-delay: 10.1976468851ms;
+  -webkit-animation-duration: 1100ms;
+  -webkit-transform: scale(0.5); }
 
 .bubble:nth-child(3) {
-  left: 52px;
-  -webkit-animation-delay: 24.2691737692ms;
-  -webkit-animation-duration: 800ms;
-  -webkit-transform: scale(0.4); }
-
-.bubble:nth-child(4) {
-  left: 10px;
-  -webkit-animation-delay: 3.6918537411ms;
-  -webkit-animation-duration: 800ms;
-  -webkit-transform: scale(0.4); }
-
-.bubble:nth-child(5) {
-  left: 145px;
-  -webkit-animation-delay: 15.0945573878ms;
-  -webkit-animation-duration: 1300ms;
+  left: 48px;
+  -webkit-animation-delay: 8.7758481277ms;
+  -webkit-animation-duration: 1000ms;
   -webkit-transform: scale(0.8); }
 
+.bubble:nth-child(4) {
+  left: 127px;
+  -webkit-animation-delay: 26.7241001742ms;
+  -webkit-animation-duration: 1200ms;
+  -webkit-transform: scale(1); }
+
+.bubble:nth-child(5) {
+  left: 70px;
+  -webkit-animation-delay: 0.0572426085ms;
+  -webkit-animation-duration: 500ms;
+  -webkit-transform: scale(0.4); }
+
 .bubble:nth-child(6) {
-  left: 167px;
-  -webkit-animation-delay: 6.188351456ms;
-  -webkit-animation-duration: 600ms;
-  -webkit-transform: scale(0.6); }
+  left: 29px;
+  -webkit-animation-delay: 20.5953287109ms;
+  -webkit-animation-duration: 400ms;
+  -webkit-transform: scale(0.7); }
 
 .bubble:nth-child(7) {
-  left: 50px;
-  -webkit-animation-delay: 2.7990785852ms;
-  -webkit-animation-duration: 700ms;
-  -webkit-transform: scale(1.3); }
+  left: 102px;
+  -webkit-animation-delay: 11.1129485749ms;
+  -webkit-animation-duration: 1100ms;
+  -webkit-transform: scale(0.7); }
 
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-    opacity: 1\9;
-    /* IE9 only */ }
-  to {
-    opacity: 1; } }
+#aboutus {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  padding-left: 3vh;
+  padding-right: 3vh; }
 
-@-moz-keyframes fadeIn {
-  from {
-    opacity: 0;
-    opacity: 1\9;
-    /* IE9 only */ }
-  to {
-    opacity: 1; } }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    opacity: 1\9;
-    /* IE9 only */ }
-  to {
-    opacity: 1; } }
-
-.fade-in {
-  opacity: 0;
-  /* make things invisible upon start */
-  -webkit-animation: fadeIn ease-in 1;
-  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
-  -moz-animation: fadeIn ease-in 1;
-  animation: fadeIn ease-in 1;
-  -webkit-animation-fill-mode: forwards;
-  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
-  -moz-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-delay: 1s;
-  -moz-animation-delay: 1s;
-  animation-delay: 1s; }
+.responsive_para {
+  font-size: 15px;
+  font-size: 2.2vw; }
 
 .profile-projects {
   margin-top: 40px; }
