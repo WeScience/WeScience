@@ -63,31 +63,39 @@ def apiProject(projectid):
 
 @app.route("/api/project/events/<int:projectid>")
 def apiProjectEvent(projectid):
-	events = database.events.query.filter_by(project_id=projectid)
+	documents = database.documents
+	events = database.events
+	users = database.users
+	results = documents.query.join(events).add_columns(events.id, events.filename, events.created, documents.document_title).filter_by(project_id=projectid)
+	# .join(users).join(documents).add_columns(users.name)
 	eventsJson = {}
-	for i in events:
+	for i in results:
 		json = {
 			"id" : i.id,
-			"document_id" : i.document_id,
-			"project_id" : i.project_id,
 			"filename" : i.filename,
 			"created" : i.created,
-			"user_id" : i.user_id
+			"document_title" : i.document_title
 		}
 		eventsJson[i.id] = json
-	return jsonify(eventsJson)
+
+	final = {
+		"total" : results.count(),
+		"data" : eventsJson
+	}
+	return jsonify(final)
 
 @app.route("/api/comments/<int:documentid>")
 def apiEventComments(documentid):
 	comments = database.comments.query.filter_by(document_id=documentid)
 	commentsJson = {}
 	for i in comments:
+		logging.info('xx')
 		json = {
 			"id" : i.id,
 			"user_id" : i.user_id,
 			"document_id" : i.document_id,
 			"comment" : i.comment,
-			"created" : i.created,
+			"created" : i.created
 		}
 		commentsJson[i.id] = json
 	return jsonify(commentsJson)
