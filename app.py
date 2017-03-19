@@ -24,9 +24,18 @@ def project(projectid):
 def projectCommits(projectid):
     return render_template('project-commits.html')
 
-@app.route("/project/<int:projectid>/<int:eventid>")
+@app.route("/project/<int:projectid>/<int:eventid>", methods=['GET', 'POST'])
 def projectEvent(projectid, eventid):
-	return render_template('event.html')
+	if request.method == 'GET':
+		return render_template('event.html')
+	elif request.method == 'POST':
+		commentText = request.form['comment']
+
+		comment = database.comments('1', '1', commentText, '1489921559')
+		database.db.session.add(comment)
+		database.db.session.commit()
+
+		return redirect(request.url)
 
 @app.route("/profile/<int:userid>", defaults={'userid': None})
 def profile(userid):

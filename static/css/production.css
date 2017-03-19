@@ -8205,6 +8205,10 @@ button.close {
   overflow: visible;
   clip: auto; }
 
+html, body {
+  height: 100%;
+  margin: 0; }
+
 a, i {
   transition: all .5s ease; }
 
@@ -8502,7 +8506,6 @@ nav.project-nav {
 .jumbotron {
   padding: 40px 0 20px 0; }
 
-
 .panel {
   margin: 0; }
 
@@ -8583,138 +8586,81 @@ nav.project-nav {
     bottom: 160px; } }
 
 .bubble:nth-child(1) {
-<<<<<<< HEAD
-  left: 65px;
-  -webkit-animation-delay: 19.4616282768ms;
-  -webkit-animation-duration: 700ms;
-  -webkit-transform: scale(0.9); }
+  left: 169px;
+  -webkit-animation-delay: 4.2208603365ms;
+  -webkit-animation-duration: 1300ms;
+  -webkit-transform: scale(0.8); }
 
 .bubble:nth-child(2) {
-  left: 17px;
-  -webkit-animation-delay: 9.5878593381ms;
-  -webkit-animation-duration: 1200ms;
-  -webkit-transform: scale(1.1); }
-
-.bubble:nth-child(3) {
-  left: 96px;
-  -webkit-animation-delay: 29.9972194086ms;
-  -webkit-animation-duration: 800ms;
-  -webkit-transform: scale(1); }
-
-.bubble:nth-child(4) {
-  left: 171px;
-  -webkit-animation-delay: 14.7024458605ms;
-  -webkit-animation-duration: 1100ms;
-  -webkit-transform: scale(0.6); }
-
-.bubble:nth-child(5) {
-  left: 41px;
-  -webkit-animation-delay: 19.1044642965ms;
-  -webkit-animation-duration: 1000ms;
+  left: 88px;
+  -webkit-animation-delay: 19.0534314967ms;
+  -webkit-animation-duration: 1300ms;
   -webkit-transform: scale(0.7); }
 
-.bubble:nth-child(6) {
-  left: 102px;
-  -webkit-animation-delay: 6.3449116039ms;
-  -webkit-animation-duration: 900ms;
+.bubble:nth-child(3) {
+  left: 13px;
+  -webkit-animation-delay: 3.2621563714ms;
+  -webkit-animation-duration: 1300ms;
   -webkit-transform: scale(0.9); }
 
-.bubble:nth-child(7) {
-  left: 141px;
-  -webkit-animation-delay: 18.1051108111ms;
-  -webkit-animation-duration: 800ms;
-  -webkit-transform: scale(0.6); }
-
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-    opacity: 1\9;
-    /* IE9 only */ }
-  to {
-    opacity: 1; } }
-
-@-moz-keyframes fadeIn {
-  from {
-    opacity: 0;
-    opacity: 1\9;
-    /* IE9 only */ }
-  to {
-    opacity: 1; } }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    opacity: 1\9;
-    /* IE9 only */ }
-  to {
-    opacity: 1; } }
-
-.fade-in {
-  opacity: 0;
-  /* make things invisible upon start */
-  -webkit-animation: fadeIn ease-in 1;
-  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
-  -moz-animation: fadeIn ease-in 1;
-  animation: fadeIn ease-in 1;
-  -webkit-animation-fill-mode: forwards;
-  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
-  -moz-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-delay: 1s;
-  -moz-animation-delay: 1s;
-  animation-delay: 1s; }
-=======
-  left: 128px;
-  -webkit-animation-delay: 18.6162861467ms;
-  -webkit-animation-duration: 700ms;
-  -webkit-transform: scale(1.3); }
-
-.bubble:nth-child(2) {
-  left: 50px;
-  -webkit-animation-delay: 2.8519062832ms;
-  -webkit-animation-duration: 600ms;
-  -webkit-transform: scale(1.1); }
-
-.bubble:nth-child(3) {
-  left: 82px;
-  -webkit-animation-delay: 14.7271781271ms;
-  -webkit-animation-duration: 400ms;
-  -webkit-transform: scale(1.3); }
-
 .bubble:nth-child(4) {
-  left: 138px;
-  -webkit-animation-delay: 24.8480647757ms;
-  -webkit-animation-duration: 1200ms;
-  -webkit-transform: scale(0.4); }
+  left: 46px;
+  -webkit-animation-delay: 15.0066977509ms;
+  -webkit-animation-duration: 1100ms;
+  -webkit-transform: scale(0.8); }
 
 .bubble:nth-child(5) {
-  left: 56px;
-  -webkit-animation-delay: 2.7618739669ms;
-  -webkit-animation-duration: 500ms;
+  left: 106px;
+  -webkit-animation-delay: 13.9966518499ms;
+  -webkit-animation-duration: 1000ms;
   -webkit-transform: scale(1.1); }
 
 .bubble:nth-child(6) {
-  left: 29px;
-  -webkit-animation-delay: 6.6865437375ms;
+  left: 151px;
+  -webkit-animation-delay: 13.092991452ms;
   -webkit-animation-duration: 900ms;
-  -webkit-transform: scale(1.3); }
+  -webkit-transform: scale(0.7); }
 
 .bubble:nth-child(7) {
-  left: 175px;
-  -webkit-animation-delay: 4.2932257837ms;
-  -webkit-animation-duration: 700ms;
+  left: 79px;
+  -webkit-animation-delay: 22.9690617947ms;
+  -webkit-animation-duration: 900ms;
   -webkit-transform: scale(0.4); }
 
 #aboutus {
   padding-left: 3vh;
   padding-right: 3vh; }
->>>>>>> d126e651d108e0d9c916b077f2175161d12394e1
+
+.profile-page {
+  height: auto;
+  min-height: 100%; }
+  .profile-page .bio {
+    margin: 20px 0 20px 0;
+    height: auto;
+    min-height: 200px; }
+  .profile-page .personal-details {
+    list-style: none;
+    margin: 10px 0 10px 0 !important;
+    padding: 0; }
+    .profile-page .personal-details li {
+      display: block;
+      margin: 5px;
+      font-size: 18px; }
+
+.profile-publications {
+  margin-top: 20px; }
+  .profile-publications h2 {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #eee; }
+  .profile-publications .pub-list {
+    margin: 10px 0 10px 0;
+    padding: 10px 0 10px 0;
+    list-style: none; }
 
 .profile-projects {
-  margin-top: 40px; }
+  margin-top: 20px; }
   .profile-projects .tab-pane {
     padding-top: 15px; }
 
