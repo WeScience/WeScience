@@ -6,6 +6,10 @@
   background: rgba( 67, 140, 8, 0.9);
   #logo{
     color: #fff;
+    a:hover {
+      text-decoration: none;
+      color: #f0f0f0;
+    }
   }
   #logo > a{
     color: #fff !important;
