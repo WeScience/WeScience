@@ -3,6 +3,10 @@
 import api from './api';
 
 export default {
+    find: function(document_id, callback) {
+        api().get('/api/document/' + document_id, callback);
+    },
+
     search: function (projectId, userId, offset, limit, filter, callback) {
 
         let queryString = '';

@@ -1,0 +1,20 @@
+footer{
+  width:100%;
+  background: #000;
+  text-align: left;
+  .container{
+    padding: 10px 0 10px 24px;
+  }
+
+  .container p{
+    margin: 5px 0 5px 0 !important;
+    color: #fff;
+  }
+
+  .container .row img{
+    width:80%;
+    height: auto;
+    text-align: right;
+    padding: 10px 24px 10px 0;
+  }
+}

@@ -5,7 +5,7 @@ import $ from 'jquery';
 const template = '\
     <li>\
     <i class="fa fa-eye"></i>\
-    <a href="#">[[document_title]]</a>\
+    <a href="/project/[[project_id]]/[[document_id]]">[[document_title]]</a>\
     <small>last updated [[last_updated]], revision [[revision]]</small>\
     </li>\
     ';
