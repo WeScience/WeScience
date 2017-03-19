@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Integer, ForeignKey, String, Column
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -105,11 +106,11 @@ class document_types(db.Model):
 
 class events(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	document_id = db.Column(db.Integer)
-	project_id = db.Column(db.Integer)
+	document_id = db.Column(db.Integer, ForeignKey('documents.id'))
+	project_id = db.Column(db.Integer, ForeignKey('projects.id'))
 	filename = db.Column(db.String(120))
 	created = db.Column(db.String(120))
-	user_id = db.Column(db.Integer)
+	user_id = db.Column(db.Integer, ForeignKey('users.id'))
 
 	def __init__(self, document_id, project_id, filename, created, user_id):
 		self.document_id = document_id
