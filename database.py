@@ -68,7 +68,7 @@ class projects(db.Model):
 
 class projects_users(db.Model):
 	user_id = db.Column(db.Integer, primary_key=True)
-	project_id = db.Column(db.Integer)
+	project_id = db.Column(db.Integer, ForeignKey('projects.id'))
 	permission_level = db.Column(db.Integer)
 
 	def __init__(self, user_id, project_id, permission_level):
