@@ -1,0 +1,48 @@
+{% extends "common/layout.html" %}
+{% block body %}
+<section class="container new-project">
+  <section class="row row-1">
+    <section class="col">
+      <h1>Create a new research project</h1>
+      <p>A project contains all the files, events, data and discussions for your project.</p>
+    </section>
+  </section>
+
+  <section class="row row-2">
+    <form id="form-title" class="container" action="/new-event" method="post" enctype="multipart/form-data">
+
+      <div class="row">
+        <div class="col">
+          <div class="form-row">
+            <label for="name">File Name</label>
+          </div>
+          <div class="form-row">
+            <input type="text" id="project-name" name="file_name">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-row">
+            <label for="name">File</label>
+          </div>
+          <div class="form-row">
+            <input type="file" name="file">
+          </div>
+        </div>
+      </div>
+  </section>
+
+
+  <section class="row row-4">
+    <div class="col">
+      <div class="form-row">
+       <input type="submit" value="Add document" class="btn btn-primary btn-block">
+     </div>
+    </div>
+  </section>
+</section>
+
+
+{% endblock %}

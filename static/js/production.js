@@ -22,7 +22,7 @@ function api() {
     };
 }
 
-},{"jquery":23}],2:[function(require,module,exports){
+},{"jquery":25}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -194,6 +194,14 @@ var _event = require('./pages/event');
 
 var _event2 = _interopRequireDefault(_event);
 
+var _login = require('./components/login');
+
+var _login2 = _interopRequireDefault(_login);
+
+var _menu = require('./components/menu');
+
+var _menu2 = _interopRequireDefault(_menu);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // We need to expose jQuery as global variable
@@ -203,6 +211,9 @@ window.jQuery = window.$ = _jquery2.default;
 // using Node.js style import works without problems
 require('bootstrap-sass');
 (0, _mainNav2.default)().init();
+(0, _login2.default)().init();
+(0, _menu2.default)().init();
+
 if ((0, _jquery2.default)('.dashboard-page').length) (0, _dashboard2.default)().init();
 if ((0, _jquery2.default)('.home-page').length) (0, _home2.default)().init();
 if ((0, _jquery2.default)('.profile-page').length) (0, _profile2.default)().init();
@@ -210,7 +221,7 @@ if ((0, _jquery2.default)('.js-project-commits-page').length) (0, _commits2.defa
 if ((0, _jquery2.default)('.js-project-page').length) _project2.default.init();
 if ((0, _jquery2.default)('.js-event-page').length) _event2.default.init();
 
-},{"./pages/commits":15,"./pages/dashboard":16,"./pages/event":17,"./pages/home":18,"./pages/mainNav":19,"./pages/profile":20,"./pages/project":21,"bootstrap-sass":22,"jquery":23}],8:[function(require,module,exports){
+},{"./components/login":11,"./components/menu":12,"./pages/commits":17,"./pages/dashboard":18,"./pages/event":19,"./pages/home":20,"./pages/mainNav":21,"./pages/profile":22,"./pages/project":23,"bootstrap-sass":24,"jquery":25}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -254,7 +265,7 @@ exports.default = {
     }
 };
 
-},{"jquery":23}],9:[function(require,module,exports){
+},{"jquery":25}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -294,7 +305,7 @@ function commitList() {
     };
 }
 
-},{"jquery":23}],10:[function(require,module,exports){
+},{"jquery":25}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -335,7 +346,68 @@ exports.default = {
     }
 };
 
-},{"jquery":23}],11:[function(require,module,exports){
+},{"jquery":25}],11:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = login;
+
+var _api = require('../api/api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function login() {
+  return {
+    init: function init() {
+      if ($("#contact-form").length) {
+        $("#contact-form").submit(function () {
+          document.cookie = "status=logged-in";
+        });
+      }
+
+      if ($("#log-out").length) {
+        $("#log-out").click(function () {
+          document.cookie = "status=logged-out";
+          window.location.replace("/");
+        });
+      }
+    }
+  };
+};
+
+},{"../api/api":1}],12:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = menu;
+
+var _api = require('../api/api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function menu() {
+    return {
+        init: function init() {
+            if (document.cookie == "status=logged-in") {
+                $("#logged-out").hide();
+                $("#logged-in").show();
+            } else {
+                $("#logged-in").hide();
+                $("#logged-out").show();
+            }
+        }
+    };
+};
+
+},{"../api/api":1}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -368,7 +440,7 @@ exports.default = {
     }
 };
 
-},{"jquery":23}],12:[function(require,module,exports){
+},{"jquery":25}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -420,7 +492,7 @@ exports.default = {
     }
 };
 
-},{"jquery":23}],13:[function(require,module,exports){
+},{"jquery":25}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -455,7 +527,7 @@ exports.default = {
     }
 };
 
-},{"jquery":23}],14:[function(require,module,exports){
+},{"jquery":25}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -492,7 +564,7 @@ exports.default = {
     }
 };
 
-},{"jquery":23}],15:[function(require,module,exports){
+},{"jquery":25}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -547,7 +619,7 @@ function commits() {
     };
 };
 
-},{"../api/events":4,"../components/commitList":9,"../components/pagination":12}],16:[function(require,module,exports){
+},{"../api/events":4,"../components/commitList":9,"../components/pagination":14}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -597,7 +669,7 @@ function dashboard() {
     };
 };
 
-},{"../api/comments":2,"../api/projects":5,"../components/notificationList":11,"../components/projectList":13}],17:[function(require,module,exports){
+},{"../api/comments":2,"../api/projects":5,"../components/notificationList":13,"../components/projectList":15}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -646,7 +718,7 @@ exports.default = {
     }
 };
 
-},{"../api/comments":2,"../api/documents":3,"../components/commentList":8,"../components/revisionList":14}],18:[function(require,module,exports){
+},{"../api/comments":2,"../api/documents":3,"../components/commentList":8,"../components/revisionList":16}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -659,7 +731,7 @@ function home() {
     };
 }
 
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -683,7 +755,7 @@ function mainNav() {
     };
 };
 
-},{"../api/api":1}],20:[function(require,module,exports){
+},{"../api/api":1}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -737,7 +809,7 @@ function profile() {
     };
 };
 
-},{"../api/projects":5,"../api/users":6,"../components/projectList":13}],21:[function(require,module,exports){
+},{"../api/projects":5,"../api/users":6,"../components/projectList":15}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -780,7 +852,7 @@ exports.default = {
     }
 };
 
-},{"../api/documents":3,"../api/projects":5,"../components/documentList":10}],22:[function(require,module,exports){
+},{"../api/documents":3,"../api/projects":5,"../components/documentList":10}],24:[function(require,module,exports){
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -3159,7 +3231,7 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-},{}],23:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.0
  * https://jquery.com/

@@ -49,10 +49,26 @@ def new():
 		is_public = request.form['status']
 
 		project = database.projects(projectName, startDate, endDate, summary, desc, is_public)
+		projects_users = database.projects_users('1', '2', '1')
+		database.db.session.add(projects_users)
 		database.db.session.add(project)
 		database.db.session.commit()
 
 		return render_template('new.html')
+
+@app.route("/new-event/<int:projectid>/<int:userid>", methods=['GET', 'POST'])
+def newEvent(projectid, userid):
+	if request.method == 'GET':
+		return render_template('new-event.html')
+	elif request.method == 'POST':
+		filename = request.form['file_name']
+		file = request.form['file']
+
+		project = database.projects(projectName, startDate, endDate, summary, desc, is_public)
+		database.db.session.add(project)
+		database.db.session.commit()
+
+		return render_template('new-event.html')
 
 # API Routes
 @app.route("/api/user/<int:userid>")
