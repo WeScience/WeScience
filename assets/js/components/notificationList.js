@@ -1,5 +1,7 @@
 'use strict';
 
+import $ from 'jquery';
+
 const template = '<li> \
     <span><a href="/profile/[[user_id]]">[[name]]</a> commented on your document</span> \
     <time>[[created]]</time> \

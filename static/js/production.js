@@ -22,7 +22,7 @@ function api() {
     };
 }
 
-},{"jquery":17}],2:[function(require,module,exports){
+},{"jquery":25}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -55,6 +55,38 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _api = require('./api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    find: function find(document_id, callback) {
+        (0, _api2.default)().get('/api/document/' + document_id, callback);
+    },
+
+    search: function search(projectId, userId, offset, limit, filter, callback) {
+
+        var queryString = '';
+        if (userId !== null) queryString += 'user_id=' + userId;
+        if (projectId !== null) queryString += 'project_id=' + projectId;
+
+        queryString += '&offset=' + offset + '&limit=' + limit + '&filter=' + filter;
+
+        var url = '/api/documents?' + queryString;
+
+        (0, _api2.default)().get(url, callback);
+    }
+};
+
+},{"./api":1}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.default = events;
 
 var _api = require('./api');
@@ -77,7 +109,7 @@ function events() {
     };
 }
 
-},{"./api":1}],4:[function(require,module,exports){
+},{"./api":1}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -91,8 +123,11 @@ var _api2 = _interopRequireDefault(_api);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-    search: function search(isPublic, userId, offset, limit, filter, callback) {
+    find: function find(project_id, callback) {
+        (0, _api2.default)().get('/api/project/' + project_id, callback);
+    },
 
+    search: function search(isPublic, userId, offset, limit, filter, callback) {
         var queryString = 'user_id=' + userId + '&offset=' + offset + '&limit=' + limit + '&filter=' + filter;
 
         if (isPublic !== null) queryString += '&is_public=' + isPublic;
@@ -103,7 +138,7 @@ exports.default = {
     }
 };
 
-},{"./api":1}],5:[function(require,module,exports){
+},{"./api":1}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -122,7 +157,7 @@ exports.default = {
     }
 };
 
-},{"./api":1}],6:[function(require,module,exports){
+},{"./api":1}],7:[function(require,module,exports){
 'use strict';
 
 // Importing jQuery in ES6 style
@@ -131,25 +166,41 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _dashboard = require('./pages/dashboard.js');
+var _dashboard = require('./pages/dashboard');
 
 var _dashboard2 = _interopRequireDefault(_dashboard);
 
-var _home = require('./pages/home.js');
+var _home = require('./pages/home');
 
 var _home2 = _interopRequireDefault(_home);
 
-var _profile = require('./pages/profile.js');
+var _profile = require('./pages/profile');
 
 var _profile2 = _interopRequireDefault(_profile);
 
-var _commits = require('./pages/commits.js');
+var _commits = require('./pages/commits');
 
 var _commits2 = _interopRequireDefault(_commits);
 
-var _mainNav = require('./pages/mainNav.js');
+var _mainNav = require('./pages/mainNav');
 
 var _mainNav2 = _interopRequireDefault(_mainNav);
+
+var _project = require('./pages/project');
+
+var _project2 = _interopRequireDefault(_project);
+
+var _event = require('./pages/event');
+
+var _event2 = _interopRequireDefault(_event);
+
+var _login = require('./components/login');
+
+var _login2 = _interopRequireDefault(_login);
+
+var _menu = require('./components/menu');
+
+var _menu2 = _interopRequireDefault(_menu);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -160,12 +211,61 @@ window.jQuery = window.$ = _jquery2.default;
 // using Node.js style import works without problems
 require('bootstrap-sass');
 (0, _mainNav2.default)().init();
+(0, _login2.default)().init();
+(0, _menu2.default)().init();
+
 if ((0, _jquery2.default)('.dashboard-page').length) (0, _dashboard2.default)().init();
 if ((0, _jquery2.default)('.home-page').length) (0, _home2.default)().init();
 if ((0, _jquery2.default)('.profile-page').length) (0, _profile2.default)().init();
 if ((0, _jquery2.default)('.js-project-commits-page').length) (0, _commits2.default)().init();
+if ((0, _jquery2.default)('.js-project-page').length) _project2.default.init();
+if ((0, _jquery2.default)('.js-event-page').length) _event2.default.init();
 
-},{"./pages/commits.js":11,"./pages/dashboard.js":12,"./pages/home.js":13,"./pages/mainNav.js":14,"./pages/profile.js":15,"bootstrap-sass":16,"jquery":17}],7:[function(require,module,exports){
+},{"./components/login":11,"./components/menu":12,"./pages/commits":17,"./pages/dashboard":18,"./pages/event":19,"./pages/home":20,"./pages/mainNav":21,"./pages/profile":22,"./pages/project":23,"bootstrap-sass":24,"jquery":25}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var template = '<div class="conversation-item">\
+    <div class="conversation-user">\
+    <img src="[[avatar]]" width="60" alt="">\
+    </div>\
+    <div class="conversation-body">\
+    <div class="name">\
+    [[name]]\
+    </div>\
+    <div class="time hidden-xs">\
+        [[created]]\
+    </div>\
+    <div class="text">\
+        [[comment]]\
+    </div>\
+    </div>\
+</div>';
+
+exports.default = {
+    getHtml: function getHtml(results) {
+        var html = '';
+        _jquery2.default.each(results, function (index, event) {
+            var currentTemplate = template;
+            _jquery2.default.each(event, function (field, value) {
+                currentTemplate = currentTemplate.replace('[[' + field + ']]', value);
+            });
+            html += currentTemplate;
+        });
+        return html;
+    }
+};
+
+},{"jquery":25}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -205,12 +305,121 @@ function commitList() {
     };
 }
 
-},{"jquery":17}],8:[function(require,module,exports){
+},{"jquery":25}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var template = '\
+    <li>\
+    <i class="fa fa-eye"></i>\
+    <a href="/project/[[project_id]]/[[document_id]]">[[document_title]]</a>\
+    <small>last updated [[last_updated]], revision [[revision]]</small>\
+    </li>\
+    ';
+
+exports.default = {
+    getHtml: function getHtml(results) {
+        var html = '';
+        var currentType = '';
+        _jquery2.default.each(results, function (index, notification) {
+            if (currentType !== notification.document_type) {
+                if (currentType !== '') html += '</ul>';
+                html += '<h3>' + notification.document_type + '</h3><ul>';
+                currentType = notification.document_type;
+            }
+            var currentTemplate = template;
+            _jquery2.default.each(notification, function (field, value) {
+                currentTemplate = currentTemplate.replace('[[' + field + ']]', value);
+            });
+            html += currentTemplate;
+        });
+        return html;
+    }
+};
+
+},{"jquery":25}],11:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = login;
+
+var _api = require('../api/api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function login() {
+  return {
+    init: function init() {
+      if ($("#contact-form").length) {
+        $("#contact-form").submit(function () {
+          document.cookie = "status=logged-in";
+        });
+      }
+
+      if ($("#log-out").length) {
+        $("#log-out").click(function () {
+          document.cookie = "status=logged-out";
+          window.location.replace("/");
+        });
+      }
+    }
+  };
+};
+
+},{"../api/api":1}],12:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = menu;
+
+var _api = require('../api/api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function menu() {
+    return {
+        init: function init() {
+            if (document.cookie == "status=logged-in") {
+                $("#logged-out").hide();
+                $("#logged-in").show();
+            } else {
+                $("#logged-in").hide();
+                $("#logged-out").show();
+            }
+        }
+    };
+};
+
+},{"../api/api":1}],13:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var template = '<li> \
     <span><a href="/profile/[[user_id]]">[[name]]</a> commented on your document</span> \
     <time>[[created]]</time> \
@@ -220,9 +429,9 @@ var template = '<li> \
 exports.default = {
     getHtml: function getHtml(results) {
         var html = '';
-        $.each(results, function (index, notification) {
+        _jquery2.default.each(results, function (index, notification) {
             var currentTemplate = template;
-            $.each(notification, function (field, value) {
+            _jquery2.default.each(notification, function (field, value) {
                 currentTemplate = currentTemplate.replace('[[' + field + ']]', value);
             });
             html += currentTemplate;
@@ -231,7 +440,7 @@ exports.default = {
     }
 };
 
-},{}],9:[function(require,module,exports){
+},{"jquery":25}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -283,7 +492,7 @@ exports.default = {
     }
 };
 
-},{"jquery":17}],10:[function(require,module,exports){
+},{"jquery":25}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -307,9 +516,9 @@ var template = '<a class="project-stub" href="/project/[[project_id]]">\
 exports.default = {
     getHtml: function getHtml(results) {
         var html = '';
-        _jquery2.default.each(results, function (index, notification) {
+        _jquery2.default.each(results, function (index, project) {
             var currentTemplate = template;
-            _jquery2.default.each(notification, function (field, value) {
+            _jquery2.default.each(project, function (field, value) {
                 currentTemplate = currentTemplate.replace('[[' + field + ']]', value);
             });
             html += currentTemplate;
@@ -318,7 +527,44 @@ exports.default = {
     }
 };
 
-},{"jquery":17}],11:[function(require,module,exports){
+},{"jquery":25}],16:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var template = '<li>\
+    <i class="fa fa-download"></i> &nbsp; <a href="[[filename]]">[[document_title]] (version [[revision]])</a><br>\
+<small>[[created]]</small>\
+</li>';
+
+exports.default = {
+    getHtml: function getHtml(revisions, offset, limit) {
+        var html = '';
+        var count = 0;
+        _jquery2.default.each(revisions, function (index, revision) {
+            var currentTemplate = template;
+            if (offset <= count && count < limit) {
+                _jquery2.default.each(revision, function (field, value) {
+                    currentTemplate = currentTemplate.replace('[[' + field + ']]', value);
+                });
+                html += currentTemplate;
+            }
+            count++;
+        });
+        if (!html && offset > 0) html = 'No Revisions Yet';
+        return html;
+    }
+};
+
+},{"jquery":25}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -373,7 +619,7 @@ function commits() {
     };
 };
 
-},{"../api/events":3,"../components/commitList":7,"../components/pagination":9}],12:[function(require,module,exports){
+},{"../api/events":4,"../components/commitList":9,"../components/pagination":14}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -423,7 +669,56 @@ function dashboard() {
     };
 };
 
-},{"../api/comments":2,"../api/projects":4,"../components/notificationList":8,"../components/projectList":10}],13:[function(require,module,exports){
+},{"../api/comments":2,"../api/projects":5,"../components/notificationList":13,"../components/projectList":15}],19:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _documents = require('../api/documents');
+
+var _documents2 = _interopRequireDefault(_documents);
+
+var _comments = require('../api/comments');
+
+var _comments2 = _interopRequireDefault(_comments);
+
+var _revisionList = require('../components/revisionList');
+
+var _revisionList2 = _interopRequireDefault(_revisionList);
+
+var _commentList = require('../components/commentList');
+
+var _commentList2 = _interopRequireDefault(_commentList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    init: function init() {
+        this.loadDownloads();
+        this.loadComments();
+    },
+
+    loadDownloads: function loadDownloads() {
+        _documents2.default.find(1, function (response) {
+            $('.js-document-title').html(response.document_title);
+            var download = _revisionList2.default.getHtml(response.events, 0, 1);
+            var revisions = _revisionList2.default.getHtml(response.events, 1, 100);
+            $('.revisions').html(revisions);
+            $('.download').html(download);
+        });
+    },
+
+    loadComments: function loadComments() {
+        _comments2.default.search(1, 1, 0, 10, '', function (response) {
+            var comments = _commentList2.default.getHtml(response.data);
+            $('.conversation-log').html(comments);
+        });
+    }
+};
+
+},{"../api/comments":2,"../api/documents":3,"../components/commentList":8,"../components/revisionList":16}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -436,7 +731,7 @@ function home() {
     };
 }
 
-},{}],14:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -460,7 +755,7 @@ function mainNav() {
     };
 };
 
-},{"../api/api":1}],15:[function(require,module,exports){
+},{"../api/api":1}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -514,7 +809,50 @@ function profile() {
     };
 };
 
-},{"../api/projects":4,"../api/users":5,"../components/projectList":10}],16:[function(require,module,exports){
+},{"../api/projects":5,"../api/users":6,"../components/projectList":15}],23:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _projects = require('../api/projects');
+
+var _projects2 = _interopRequireDefault(_projects);
+
+var _documents = require('../api/documents');
+
+var _documents2 = _interopRequireDefault(_documents);
+
+var _documentList = require('../components/documentList');
+
+var _documentList2 = _interopRequireDefault(_documentList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    init: function init() {
+        this.loadProject();
+        this.loadDocuments();
+    },
+
+    loadProject: function loadProject() {
+        _projects2.default.find(1, function (response) {
+            $('.js-project-readme').html(response.description);
+            $('.js-project-title').html(response.project_name);
+        });
+    },
+
+    loadDocuments: function loadDocuments() {
+        _documents2.default.search(1, null, 0, 50, '', function (response) {
+            var html = _documentList2.default.getHtml(response.data);
+            if (!html) html = '<p>No Documents Found</p>';
+            $('.project-documents').html(html);
+        });
+    }
+};
+
+},{"../api/documents":3,"../api/projects":5,"../components/documentList":10}],24:[function(require,module,exports){
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -2893,7 +3231,7 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-},{}],17:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.0
  * https://jquery.com/
@@ -13139,4 +13477,4 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[6]);
+},{}]},{},[7]);

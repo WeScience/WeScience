@@ -3,8 +3,11 @@
 import api from './api';
 
 export default {
-    search: function (isPublic, userId, offset, limit, filter, callback) {
+    find: function(project_id, callback) {
+        api().get('/api/project/' + project_id, callback);
+    },
 
+    search: function (isPublic, userId, offset, limit, filter, callback) {
         let queryString = 'user_id=' + userId +
             '&offset=' + offset +
             '&limit=' + limit +

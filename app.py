@@ -115,6 +115,44 @@ def apiProjects():
 	}
 	return jsonify(final)
 
+@app.route("/api/document/<int:documentid>")
+def apidocument(documentid):
+	sql_text = """SELECT e.id, e.filename, e.created, d.document_title
+	FROM events AS e
+	LEFT JOIN documents AS d ON e.document_id = d.id
+	WHERE e.document_id = :document_id
+	ORDER BY created DESC
+	"""
+	results = db.engine.execute(sql_text, { "document_id": documentid })
+
+	sql = text("select count() AS count from events WHERE document_id = :document_id")
+	count_results = db.engine.execute(sql, { "document_id": documentid })
+	
+	for i in count_results:
+		total = i.count
+
+	eventsJson = {}
+	count = 0
+	for i in results:
+		json = {
+			"id" : i.id,
+			"filename" : i.filename,
+			"document_title" : i.document_title,
+			"created" : datetime.datetime.fromtimestamp(int(i.created)).strftime('%d/%m/%Y %-I:%M%p'),
+			"revision" : total
+		}
+		total = total - 1
+		eventsJson[count] = json
+		count = count + 1
+
+	document = database.documents.query.filter_by(id=documentid).first()
+	documentJson = {
+		"id" : document.id,
+		"document_title" : document.document_title,
+		"events" : eventsJson
+	}
+	return jsonify(documentJson)
+
 @app.route("/api/project/events/<int:projectid>")
 def apiProjectEvent(projectid):
 	sql_vars = {
@@ -138,7 +176,7 @@ def apiProjectEvent(projectid):
 			"id" : i.id,
 			"document_id" : i.document_id,
 			"filename" : i.filename,
-			"created" : time.strftime("%d/%m/%Y %-I:%M%p"),
+			"created" : datetime.datetime.fromtimestamp(int(i.created)).strftime('%d/%m/%Y %-I:%M%p'),
 			"document_title" : i.document_title,
 			"name" : i.name,
 			"avatar" : i.avatar,
@@ -171,6 +209,9 @@ def apiEventComments():
 	if 'project_id' in request.args:
 		sql_text += " AND e.project_id = :project_id"
 
+	if 'document_id' in request.args:
+		sql_text += " AND d.id = :document_id"
+
 	if 'user_id' in request.args:
 		sql_text += " AND e.user_id = :user_id"
 
@@ -188,7 +229,7 @@ def apiEventComments():
 			"document_id" : i.document_id,
 			"comment" : i.comment,
 			"project_id": i.project_id,
-			"created" : time.strftime("%d/%m/%Y %-I:%M%p")
+			"created" : datetime.datetime.fromtimestamp(int(i.created)).strftime('%d/%m/%Y %-I:%M%p'),
 		}
 		commentsJson[i.id] = json
 
@@ -204,10 +245,57 @@ def apiEventComments():
 	}
 	return jsonify(final)
 
-@app.route("/api/documents/getdocumentsbyuser/<int:userid>")
-def apiGetDocumentsByUser(userid):
-	#documents = database.documents
-	return None
+@app.route("/api/documents")
+def apiDocuments():
+	sql_text = """
+	SELECT d.id, t.document_type, d.document_title, e.project_id
+	, (SELECT created FROM events AS e WHERE e.document_id = d.id ORDER BY created DESC LIMIT 1) AS last_updated
+	, (SELECT count(*) FROM events AS e WHERE e.document_id = d.id) AS revision
+	FROM documents AS d
+	LEFT JOIN document_types AS t ON d.document_type = t.id
+	LEFT JOIN events AS e ON d.id = e.document_id
+	"""
+
+	where = " WHERE 1=1"
+	if 'project_id' in request.args:
+		where += " AND e.project_id = :project_id"
+
+	if 'user_id' in request.args:
+		where += " AND e.user_id = :user_id"
+
+	sql_text += where + " GROUP BY d.id ORDER BY t.document_type";
+
+	if 'offset' in request.args:
+		sql_text += " LIMIT :offset,:limit"
+
+	sql = text(sql_text)
+	results = db.engine.execute(sql, request.args)
+
+	documentsJson = {}
+	count = 0
+	for i in results:
+		json = {
+			"document_id" : i.id,
+			"document_type" : i.document_type,
+			"last_updated" : datetime.datetime.fromtimestamp(int(i.last_updated)).strftime('%d/%m/%Y %-I:%M%p'),
+			"document_title" : i.document_title,
+			"revision" : i.revision,
+			"project_id" : i.project_id
+		}
+		documentsJson[count] = json
+		count = count + 1
+
+	sql = text("select count(DISTINCT(d.id)) AS count from documents AS d LEFT JOIN events AS e ON d.id = e.document_id" + where)
+	results = db.engine.execute(sql, request.args)
+	
+	for i in results:
+		total = i.count
+
+	final = {
+		"total" : total,
+		"data" : documentsJson
+	}
+	return jsonify(final)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

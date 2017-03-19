@@ -18,7 +18,8 @@
 
 .bg{
   background-image: url(../../static/img/home_background.jpg); 
-  height: 65vh;
+  width: 100vw;
+  height: auto;
   padding-right: 0;
   padding-left: 0;
     background-size: cover;
@@ -28,9 +29,22 @@
     background-position: center center;
 }
 
+#beakerAnimation {
+	height: 65vh;
+	width: 100vw;
+}
+
+.jumbotron{
+    padding: 40px 0 20px 0;
+}
+
+.panel{
+    margin: 0;
+}
+
 #container {
   height: 270px;
-  margin: 50px auto;
+  margin: 0px auto;
   overflow: hidden;
   position: relative;
   width: 248px;
@@ -120,13 +134,7 @@
 }
 
 #aboutus{
-  padding-top: 2vh;
-  padding-bottom: 2vh;
   padding-left: 3vh;
   padding-right: 3vh;
 }
 
-.responsive_para {
-    font-size: 15px;
-    font-size: 2.2vw;
-}

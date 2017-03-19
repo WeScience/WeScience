@@ -13,9 +13,9 @@ const template = '<a class="project-stub" href="/project/[[project_id]]">\
 export default {
     getHtml: function(results) {
         let html = '';
-        $.each(results, function(index, notification) {
+        $.each(results, function(index, project) {
             let currentTemplate = template;
-            $.each(notification, function(field, value) {
+            $.each(project, function(field, value) {
                 currentTemplate = currentTemplate.replace('[[' + field + ']]', value);
             });
             html += currentTemplate;
