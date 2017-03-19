@@ -68,15 +68,26 @@ def apiProjectEvent(projectid):
 			"document_id" : i.document_id,
 			"project_id" : i.project_id,
 			"filename" : i.filename,
-			"created" : i.created
+			"created" : i.created,
+			"user_id" : i.user_id
 		}
 		eventsJson[i.id] = json
 	return jsonify(eventsJson)
 
 @app.route("/api/comments/<int:documentid>")
-def apiEventComments(eventid):
-	comments = database.comments.filter_by(document_id=documentid)
-	return jsonify(comments)
+def apiEventComments(documentid):
+	comments = database.comments.query.filter_by(document_id=documentid)
+	commentsJson = {}
+	for i in comments:
+		json = {
+			"id" : i.id,
+			"user_id" : i.user_id,
+			"document_id" : i.document_id,
+			"comment" : i.comment,
+			"created" : i.created,
+		}
+		commentsJson[i.id] = json
+	return jsonify(commentsJson)
 
 @app.route("/api/documents/getdocumentsbyuser/<int:userid>")
 def apiGetDocumentsByUser(userid):
