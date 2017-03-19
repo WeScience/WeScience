@@ -11,8 +11,6 @@ import project from './pages/project';
 import event from './pages/event';
 import login from './components/login';
 import menu from './components/menu';
-import fork from './pages/fork';
-
 
 // We need to expose jQuery as global variable
 window.jQuery = window.$ = $;
@@ -23,9 +21,6 @@ require('bootstrap-sass');
 mainNav().init();
 login().init();
 menu().init();
-
-fork().init();
-fork().forked();
 
 if ($('.dashboard-page').length) dashboard().init();
 if ($('.home-page').length) home().init();
