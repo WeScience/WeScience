@@ -22,7 +22,35 @@ function api() {
     };
 }
 
-},{"jquery":9}],2:[function(require,module,exports){
+},{"jquery":12}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = events;
+
+var _api = require('./api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function events() {
+
+    return {
+        search: function search(projectId, userId, offset, limit, filter, callback) {
+
+            var queryString = 'user_id=' + userId + '&offset=' + offset + '&limit=' + limit + '&filter=' + filter;
+
+            var url = '/api/project/events/' + projectId + '?' + queryString;
+
+            (0, _api2.default)().get(url, callback);
+        }
+    };
+}
+
+},{"./api":1}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -45,7 +73,7 @@ function projects() {
     };
 }
 
-},{"./api":1}],3:[function(require,module,exports){
+},{"./api":1}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -68,7 +96,7 @@ function users() {
     };
 }
 
-},{"./api":1}],4:[function(require,module,exports){
+},{"./api":1}],5:[function(require,module,exports){
 'use strict';
 
 // Importing jQuery in ES6 style
@@ -89,6 +117,14 @@ var _profile = require('./pages/profile.js');
 
 var _profile2 = _interopRequireDefault(_profile);
 
+var _commits = require('./pages/commits.js');
+
+var _commits2 = _interopRequireDefault(_commits);
+
+var _mainNav = require('./pages/mainNav.js');
+
+var _mainNav2 = _interopRequireDefault(_mainNav);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // We need to expose jQuery as global variable
@@ -97,12 +133,44 @@ window.jQuery = window.$ = _jquery2.default;
 // ES6 import does not work it throws error: Missing jQuery
 // using Node.js style import works without problems
 require('bootstrap-sass');
-
+(0, _mainNav2.default)().init();
 if ((0, _jquery2.default)('.dashboard-page').length) (0, _dashboard2.default)().init();
 if ((0, _jquery2.default)('.home-page').length) (0, _home2.default)().init();
 if ((0, _jquery2.default)('.profile-page').length) (0, _profile2.default)().init();
+if ((0, _jquery2.default)('.js-project-commits-page').length) (0, _commits2.default)().init();
 
-},{"./pages/dashboard.js":5,"./pages/home.js":6,"./pages/profile.js":7,"bootstrap-sass":8,"jquery":9}],5:[function(require,module,exports){
+},{"./pages/commits.js":6,"./pages/dashboard.js":7,"./pages/home.js":8,"./pages/mainNav.js":9,"./pages/profile.js":10,"bootstrap-sass":11,"jquery":12}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = commits;
+
+var _events = require('../api/events');
+
+var _events2 = _interopRequireDefault(_events);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function commits() {
+    return {
+
+        totalCommits: null,
+
+        init: function init() {
+            var _this = this;
+            (0, _events2.default)().search(1, 1, 0, 10, '', function (response) {
+                _this.totalCommits = response.total;
+                $.each(response.data, function (index, val) {
+                    console.log(val);
+                });
+            });
+        }
+    };
+};
+
+},{"../api/events":2}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -126,7 +194,7 @@ function dashboard() {
     };
 };
 
-},{"../api/projects":2}],6:[function(require,module,exports){
+},{"../api/projects":3}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -135,51 +203,36 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = home;
 function home() {
     return {
-        init: function init() {
-            console.log("Working");
-
-            var base_w = window.innerWidth / 2;
-            var base_h = window.innerWidth / 2;
-
-            for (var i = 0; i < 10; i++) {
-                $("#wrapper").append("<div class='circle" + i + " sub-border'></div>");
-                //set current circle width
-                $(".circle" + i).css("width", base_w - 40 * i);
-                //set current circle height
-                $(".circle" + i).css("height", base_h - 40 * i);
-                //get half current width
-                var cur_w = $(".circle" + i).width() / 2;
-                //get half current height
-                var cur_h = $(".circle" + i).height() / 2;
-
-                if (i !== 0) {
-                    //get half previous width
-                    var pre_w = $(".circle" + (i - 1)).width() / 2;
-                    //get half previous height
-                    var pre_h = $(".circle" + (i - 1)).height() / 2;
-                    //get previous position
-                    var pre_top = $(".circle" + (i - 1)).position().top;
-                    var pre_left = $(".circle" + (i - 1)).position().left;
-
-                    //set current position
-                    $(".circle" + i).css("top", pre_top + pre_h - cur_h);
-                    $(".circle" + i).css("left", pre_left + pre_w - cur_w);
-                } else {
-                    //first circle
-                    $(".circle" + i).css("top", 0);
-                    $(".circle" + i).css("left", base_h - cur_w);
-                }
-                //rotate animation
-                $(".circle" + i).css("-webkit-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
-                $(".circle" + i).css("-moz-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
-                $(".circle" + i).css("-o-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
-                $(".circle" + i).css("-ms-animation", "spin " + (i + 1) * 1.5 + "s infinite linear");
-            }
-        }
+        init: function init() {}
     };
 }
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = mainNav;
+
+var _api = require('../api/api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function mainNav() {
+    return {
+        init: function init() {
+            console.log("NavFix");
+            if (window.innerWidth < 768) {
+                $("#navToggle").appendTo(".row");
+            }
+        }
+    };
+};
+
+},{"../api/api":1}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -196,15 +249,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function profile() {
     return {
         init: function init() {
-            console.log("H");
             (0, _users2.default)().find(1, function (response) {
-                console.log(response);
+                $.each(response, function (fieldName, value) {
+                    $('.js-' + fieldName).html(value);
+                });
+
+                $('.js-avatar-image').attr('src', response.avatar);
             });
         }
     };
 };
 
-},{"../api/users":3}],8:[function(require,module,exports){
+},{"../api/users":4}],11:[function(require,module,exports){
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -2583,7 +2639,7 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.0
  * https://jquery.com/
@@ -12829,4 +12885,4 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[4]);
+},{}]},{},[5]);
