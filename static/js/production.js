@@ -22,7 +22,7 @@ function api() {
     };
 }
 
-},{"jquery":12}],2:[function(require,module,exports){
+},{"jquery":14}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -139,7 +139,99 @@ if ((0, _jquery2.default)('.home-page').length) (0, _home2.default)().init();
 if ((0, _jquery2.default)('.profile-page').length) (0, _profile2.default)().init();
 if ((0, _jquery2.default)('.js-project-commits-page').length) (0, _commits2.default)().init();
 
-},{"./pages/commits.js":6,"./pages/dashboard.js":7,"./pages/home.js":8,"./pages/mainNav.js":9,"./pages/profile.js":10,"bootstrap-sass":11,"jquery":12}],6:[function(require,module,exports){
+},{"./pages/commits.js":8,"./pages/dashboard.js":9,"./pages/home.js":10,"./pages/mainNav.js":11,"./pages/profile.js":12,"bootstrap-sass":13,"jquery":14}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = commitList;
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var template = '\
+<li> \
+    <img src="[[avatar]]" class="img-rounded" width="40" height="40"> \
+    <strong>[[created]]</strong> \
+    <a href="#">[[name]]</a> \
+    updated \
+    <a href="/projects/[[project_id]]/[[document_id]]">[[document_title]]</a> \
+</li>\
+';
+
+function commitList() {
+    return {
+        getHtml: function getHtml(results) {
+            var html = '';
+            _jquery2.default.each(results, function (index, event) {
+                var currentTemplate = template;
+                _jquery2.default.each(event, function (field, value) {
+                    currentTemplate = currentTemplate.replace('[[' + field + ']]', value);
+                });
+                html += currentTemplate;
+            });
+            return html;
+        }
+    };
+}
+
+},{"jquery":14}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+
+    $paginationContainers: (0, _jquery2.default)('.js-pagination'),
+
+    generate: function generate(total, offset, limit, callback) {
+        var numberOfPages = parseInt(total / limit);
+        if (total % limit > 0) numberOfPages++;
+        var currentPage = offset == 0 ? 1 : parseInt(offset / limit);
+        if (offset % limit == 0 && offset > 0) currentPage++;
+
+        var plusPage = currentPage + 1;
+        if (plusPage > numberOfPages) plusPage = numberOfPages;
+        var minusPage = currentPage - 1;
+        if (minusPage < 1) minusPage = 1;
+
+        var html = '<li><a href="#" data-page="' + minusPage + '"><i class="fa fa-angle-left"></i></a>';
+        for (var i = 1; i <= numberOfPages; i++) {
+            html += '<li';
+            html += currentPage == i ? ' class="active"' : '';
+            html += '><a href="#" data-page="' + i + '">' + i + '</a></li>';
+        }
+        html += '<li><a href="#" data-page="' + plusPage + '"><i class="fa fa-angle-right"></i></a>';
+
+        this.$paginationContainers.html(html);
+        this.setupClicks(limit, callback);
+    },
+
+    setupClicks: function setupClicks(limit, callback) {
+        var _this = this;
+        _this.$paginationContainers.find('li > a').off('click').on('click', function (e) {
+            e.preventDefault();
+            _this.$paginationContainers.find('li').removeClass('active');
+            (0, _jquery2.default)(this).parents('li').addClass('active');
+            var pageNumber = (0, _jquery2.default)(this).data('page');
+            if (pageNumber) callback((pageNumber - 1) * limit);
+        });
+    }
+};
+
+},{"jquery":14}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -151,6 +243,14 @@ var _events = require('../api/events');
 
 var _events2 = _interopRequireDefault(_events);
 
+var _commitList = require('../components/commitList');
+
+var _commitList2 = _interopRequireDefault(_commitList);
+
+var _pagination = require('../components/pagination');
+
+var _pagination2 = _interopRequireDefault(_pagination);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function commits() {
@@ -158,19 +258,35 @@ function commits() {
 
         totalCommits: null,
 
+        perPage: 20,
+
+        currentOffset: 0,
+
         init: function init() {
+            this.load();
+        },
+
+        load: function load() {
             var _this = this;
-            (0, _events2.default)().search(1, 1, 0, 10, '', function (response) {
+            (0, _events2.default)().search(1, 1, _this.currentOffset, _this.perPage, '', function (response) {
                 _this.totalCommits = response.total;
-                $.each(response.data, function (index, val) {
-                    console.log(val);
-                });
+                var html = (0, _commitList2.default)().getHtml(response.data);
+                $('.commit-list').html(html);
+                _this.paginate();
+            });
+        },
+
+        paginate: function paginate() {
+            var _this = this;
+            _pagination2.default.generate(_this.totalCommits, _this.currentOffset, _this.perPage, function (offset) {
+                _this.currentOffset = offset;
+                _this.load();
             });
         }
     };
 };
 
-},{"../api/events":2}],7:[function(require,module,exports){
+},{"../api/events":2,"../components/commitList":6,"../components/pagination":7}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -194,7 +310,7 @@ function dashboard() {
     };
 };
 
-},{"../api/projects":3}],8:[function(require,module,exports){
+},{"../api/projects":3}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -207,7 +323,7 @@ function home() {
     };
 }
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -232,7 +348,7 @@ function mainNav() {
     };
 };
 
-},{"../api/api":1}],10:[function(require,module,exports){
+},{"../api/api":1}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -260,7 +376,7 @@ function profile() {
     };
 };
 
-},{"../api/users":4}],11:[function(require,module,exports){
+},{"../api/users":4}],13:[function(require,module,exports){
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -2639,7 +2755,7 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.0
  * https://jquery.com/
