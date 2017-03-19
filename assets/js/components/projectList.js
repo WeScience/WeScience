@@ -2,7 +2,7 @@
 
 import $ from 'jquery';
 
-const template = '<a class="project-stub" href="#">\
+const template = '<a class="project-stub" href="/project/[[project_id]]">\
     <h3>[[project_name]]</h3>\
     <i class="fa fa-anchor"></i>\
     <p>[[description]]</p>\

@@ -92,15 +92,16 @@ def apiProjects():
 	sql = text(sql_text)
 	results = db.engine.execute(sql, request.args)
 
-	commentsJson = {}
+	projectsJson = {}
 	for i in results:
 		json = {
+			"project_id" : i.id,
 			"project_name" : i.project_name,
 			"description" : i.description,
 			"created" : datetime.datetime.fromtimestamp(int(i.start_date)).strftime('%d/%m/%Y %-I:%M%p'),
 			"last_updated": datetime.datetime.fromtimestamp(int(i.start_date) + random.randint(3600, 7200)).strftime('%d/%m/%Y %-I:%M%p'),
 		}
-		commentsJson[i.id] = json
+		projectsJson[i.id] = json
 
 	sql = text("select count() AS count from projects AS p LEFT JOIN projects_users AS pu ON p.id = pu.project_id" + where)
 	results = db.engine.execute(sql, request.args)
@@ -110,7 +111,7 @@ def apiProjects():
 
 	final = {
 		"total" : total,
-		"data" : commentsJson
+		"data" : projectsJson
 	}
 	return jsonify(final)
 
