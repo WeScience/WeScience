@@ -16,30 +16,31 @@ export default function fork() {
           })
         },
         forked: function(){
-          var isForked = function getCookie("forked")
-          {
-            var re = new RegExp(name + "=([^;]+)");
+            var isForked;
+            var re = new RegExp("forked" + "=([^;]+)");
             var value = re.exec(document.cookie);
+
             if(value != null || value != "false"){
-              return false;
+              isForked = false;
             }
             else if(value == "true"){
-              return true;
+              isForked = true;
             }
             else{
-              return false;
+              isForked = false;
             }
-            //return (value != null) ? unescape(value[1]) : null;
-          }
 
           if(isForked){
             var basic = "Forked project: ";
-            var prjct = function getCookie("forked-project")
-            {
-              var re = new RegExp(name + "=([^;]+)");
+            var prjct;
+              var re = new RegExp("forked-project" + "=([^;]+)");
               var value = re.exec(document.cookie);
-              return (value != null) ? unescape(value[1]) : null;
-            }
+              if(value != null){
+                prjct = unescape(value[1]);
+              }
+              else {
+                prjct = null;
+              }
 
             var output = basic + prjct;
             $("project-summary").text(output);

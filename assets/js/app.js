@@ -11,7 +11,7 @@ import project from './pages/project';
 import event from './pages/event';
 import login from './components/login';
 import menu from './components/menu';
-import * from './pages/fork';
+import fork from './pages/fork';
 
 
 // We need to expose jQuery as global variable
