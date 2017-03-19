@@ -1,0 +1,18 @@
+.commit-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+        @extend .clearfix;
+        line-height: 40px;
+        padding: 6px 24px;
+        background: $background-light;
+        border-bottom: 1px solid #fff;
+        time {
+            @extend small;
+        }
+        a.view {
+            @extend .pull-right;
+        }
+    }
+}

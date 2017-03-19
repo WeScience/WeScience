@@ -10,8 +10,11 @@ def index():
 
 @app.route("/project/<int:projectid>")
 def project(projectid):
-	#project = database.projects.query.filter_by(id=project).first()
 	return render_template('project.html')
+
+@app.route("/project/commits/<int:projectid>")
+def projectCommits(projectid):
+    return render_template('project-commits.html')
 
 @app.route("/project/<int:projectid>/<int:eventid>")
 def projectEvent(projectid, eventid):
