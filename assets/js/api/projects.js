@@ -2,12 +2,18 @@
 
 import api from './api';
 
-export default function projects() {
+export default {
+    search: function (isPublic, userId, offset, limit, filter, callback) {
 
-    return {
-        search: function(user_id, callback) {
-            api().get('/api/comments/' + 1, callback);
-        }
+        let queryString = 'user_id=' + userId +
+            '&offset=' + offset +
+            '&limit=' + limit +
+            '&filter=' + filter;
+
+        if (isPublic !== null) queryString += '&is_public=' + isPublic;
+
+        let url = '/api/projects?' + queryString;
+
+        api().get(url, callback);
     }
-
 }

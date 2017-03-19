@@ -4,7 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 import database
 import json
 import time
-import pprint
+import datetime
+import random
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -68,6 +69,51 @@ def apiProject(projectid):
 	}
 	return jsonify(projectJson)
 
+@app.route("/api/projects")
+def apiProjects():
+	sql_text = """
+	SELECT p.id, p.project_name, p.description, p.start_date
+	, (SELECT e.created FROM events AS e WHERE e.project_id = p.id LIMIT 1) AS last_updated
+	FROM projects AS p
+	LEFT JOIN projects_users AS pu ON p.id = pu.project_id
+	"""
+
+	where = " WHERE 1=1"
+
+	if 'user_id' in request.args:
+		where += " AND pu.user_id = :user_id"
+	
+	if 'is_public' in request.args:
+		where += " AND p.isPublic = :is_public"
+
+	if 'offset' in request.args:
+		sql_text += where + " LIMIT :offset,:limit"
+
+	sql = text(sql_text)
+	results = db.engine.execute(sql, request.args)
+
+	commentsJson = {}
+	for i in results:
+		json = {
+			"project_name" : i.project_name,
+			"description" : i.description,
+			"created" : datetime.datetime.fromtimestamp(int(i.start_date)).strftime('%d/%m/%Y %-I:%M%p'),
+			"last_updated": datetime.datetime.fromtimestamp(int(i.start_date) + random.randint(3600, 7200)).strftime('%d/%m/%Y %-I:%M%p'),
+		}
+		commentsJson[i.id] = json
+
+	sql = text("select count() AS count from projects AS p LEFT JOIN projects_users AS pu ON p.id = pu.project_id" + where)
+	results = db.engine.execute(sql, request.args)
+	
+	for i in results:
+		total = i.count
+
+	final = {
+		"total" : total,
+		"data" : commentsJson
+	}
+	return jsonify(final)
+
 @app.route("/api/project/events/<int:projectid>")
 def apiProjectEvent(projectid):
 	sql_vars = {
@@ -110,23 +156,6 @@ def apiProjectEvent(projectid):
 		"data" : eventsJson
 	}
 	return jsonify(final)
-
-@app.route("/api/projects/getprojectsbyuser/<int:userid>")
-def apiProjectByUser(userid):
-	projects = database.projects
-	#projectsData = database.projects_users.query.join(projects).add_columns(projects_users.id, projects.id, projects.project_name, projects.start_date, projects.end_date, projects.description, projects.isPublic).filter_by(user_id=userid)
-	projectJson = {}
-	for i in projects:
-		json = {
-			"id" : i.id,
-			"project_name" : i.project_name,
-			"start_date" : i.start_date,
-			"end_date" : i.end_date,
-			"description" : i.description,
-			"is_public" : i.isPublic
-		}
-		projectJson[i.id] = json
-	return jsonify(projectJson) 
 
 @app.route("/api/comments")
 def apiEventComments():
