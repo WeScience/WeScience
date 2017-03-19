@@ -28,6 +28,7 @@
       }
       li a{
         color: #fff !important;
+        display: block;
       }
       li:hover{
         background: rgba( 67, 120, 8, 0.7) !important;
@@ -61,13 +62,16 @@
         height: 55px;
         li{
           width:25%;
-          height: 40px;
-          margin: 15px 0 0 0;
+          height: 55px;
+          margin: 0;
           padding: 5px;
         }
         li a{
           padding: 5px 5px 5px 5px;
-          font-size: 22px;
+          line-height: 35px;
+          &:hover {
+            text-decoration: none;
+          }
         }
       }
     }
