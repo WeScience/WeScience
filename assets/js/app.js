@@ -5,6 +5,7 @@ import $ from "jquery";
 import dashboard from './pages/dashboard.js';
 import home from './pages/home.js';
 import profile from './pages/profile.js';
+import mainNav from './pages/mainNav.js';
 
 // We need to expose jQuery as global variable
 window.jQuery = window.$ = $;
@@ -12,7 +13,7 @@ window.jQuery = window.$ = $;
 // ES6 import does not work it throws error: Missing jQuery
 // using Node.js style import works without problems
 require('bootstrap-sass');
-
+mainNav().init();
 if ($('.dashboard-page').length) dashboard().init();
 if ($('.home-page').length) home().init();
 if ($('.profile-page').length) profile().init();
