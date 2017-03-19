@@ -1,8 +1,9 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from sqlalchemy import text
 from flask_sqlalchemy import SQLAlchemy
 import database
 import json
+import time
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -68,22 +69,32 @@ def apiProject(projectid):
 
 @app.route("/api/project/events/<int:projectid>")
 def apiProjectEvent(projectid):
-	documents = database.documents
-	events = database.events
-	users = database.users
-	sql_text = "SELECT e.id, e.filename, e.created, u.name, u.avatar, d.id AS document_id, d.document_title FROM events AS e LEFT JOIN documents AS d ON e.document_id = d.id LEFT JOIN users AS u ON e.user_id = u.id"
+	sql_vars = {
+		"project_id" : projectid,
+		"offset" : request.args['offset'],
+		"limit" : request.args['limit']
+	}
+
+	sql_text = """SELECT e.id, e.project_id, e.filename, e.created, u.name, u.avatar, d.id AS document_id, d.document_title 
+	FROM events AS e 
+	LEFT JOIN documents AS d ON e.document_id = d.id 
+	LEFT JOIN users AS u ON e.user_id = u.id
+	WHERE project_id = :project_id
+	LIMIT :offset, :limit
+	"""
 	sql = text(sql_text)
-	results = db.engine.execute(sql)
+	results = db.engine.execute(sql, sql_vars)
 	eventsJson = {}
 	for i in results:
 		json = {
 			"id" : i.id,
 			"document_id" : i.document_id,
 			"filename" : i.filename,
-			"created" : i.created,
+			"created" : time.strftime("%d/%m/%Y %-I:%M%p"),
 			"document_title" : i.document_title,
 			"name" : i.name,
-			"avatar" : i.avatar
+			"avatar" : i.avatar,
+			"project_id" : i.project_id
 		}
 		eventsJson[i.id] = json
 
