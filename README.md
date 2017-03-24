@@ -1,0 +1,2 @@
+# WeScience - Open Source Collaboration
+
